@@ -1,0 +1,506 @@
+<!-- Kai Singer -->
+
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+
+{% block extra_stylesheets %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+<style>
+  .map_container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 500px;
+  }
+
+  .map {
+    flex: 1;
+    width: 100%;
+    min-height: 200px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script>
+    function resetForm(button) {
+      const form = button.closest("form");
+      if (!form) return;
+
+      const inputs = form.querySelectorAll('input:not([type="hidden"])');
+      inputs.forEach(input => {
+        input.value = "";
+      });
+
+      const selects = form.querySelectorAll("select");
+      selects.forEach(select => {
+        select.value = "all";
+      });
+    }
+  </script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+  <script>
+    function createMap(fw_id, lat, lng, name, adresse) {
+      const lat_float = parseFloat(lat);
+      const lng_float = parseFloat(lng);
+      mapboxgl.accessToken = 'pk.eyJ1IjoiN290ZW50YW56IiwiYSI6ImNtYXh1OWRuMTAyOXAycnIydTViaDI4OTQifQ.xBqrTk-WNWkprQyHVmcRmw';
+      
+      let zuhause = [lng_float, lat_float]; // Fallback-Koordinaten: Unternehmensstandort
+      let fallback = true;
+      if ('{{ buerger_coords }}' != 'None') {
+        zuhause = JSON.parse('{{ buerger_coords|escapejs }}'); //escapejs -> sicheres Einfügen von JSON in JS
+        fallback = false;
+      }
+
+      const map = new mapboxgl.Map({
+        container: `${ fw_id }_map`,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: zuhause,
+        zoom: 10
+      });
+
+      // Scroll-Zoom nur mit Strg-Taste aktivieren
+      map.scrollZoom.disable();
+      const mapContainer = map.getCanvasContainer();
+      mapContainer.addEventListener('wheel', (e) => {
+        if (e.ctrlKey) {
+          map.scrollZoom.enable();
+        } else {
+          map.scrollZoom.disable();
+        }
+      }, { passive: true });
+
+      if (fallback == false) {
+        new mapboxgl.Marker({ color: 'red' })
+          .setLngLat(zuhause)
+          .setPopup(new mapboxgl.Popup().setHTML("<strong>Zuhause</strong>"))
+          .addTo(map);
+      }
+
+      new mapboxgl.Marker({ color: 'blue' })
+        .setLngLat([lng_float, lat_float])
+        .setPopup(new mapboxgl.Popup().setHTML(`<strong>${ name }</strong><br>${ adresse }`))
+        .addTo(map);
+    }
+  </script>
+{% endblock %}
+
+{% block page_title %}Jobbörse - Bürger{% endblock %}
+
+{% block header_title %}Jobbörse - Bürger{% endblock %}
+
+{% block content %}
+  {% for jobangebot in jobangebote_liste %}
+    <div class="floating_bg" id="fw_jobangebot_{{ jobangebot.unternehmen_id }}_{{ jobangebot.stelle_id }}">
+      <div class="floating_window card">
+        <button class="button danger fw_close_button" onclick="closeWindow('jobangebot_{{ jobangebot.unternehmen_id }}_{{ jobangebot.stelle_id }}')">
+          <img src="{% static 'imgs/close_white.png' %}">
+        </button>
+        <div class="header">
+          <img src="{% static 'imgs/arbeit.png' %}">
+          <h1>{{ jobangebot.bezeichnung }} (Jobangebot)</h1>
+        </div>
+        <div class="card_row">
+          <div>
+            <p><span class="bold">Arbeitgeber:</span> {{ jobangebot.unternehmen_name }}</p>
+            <p><span class="bold">Adresse:</span> {{ jobangebot.unternehmen_adresse }}</p>
+            <hr>
+            <p><span class="bold">Bereiche:</span> {{ jobangebot.bereiche|join:", " }}</p>
+            <p><span class="bold">Gehalt:</span> {{ jobangebot.gehalt_str }} € / Monat</p>
+            {% if jobangebot.dauer == 0 %}
+              <p><span class="bold">Dauer:</span> Unbefristet</p>
+            {% else %}
+              <p><span class="bold">Dauer:</span> {{ jobangebot.dauer }} Monate</p>
+            {% endif %}
+          </div>
+          <div class="map_container">
+            <div class="map" id="jobangebot_{{ jobangebot.unternehmen_id }}_{{ jobangebot.stelle_id }}_map"></div>
+            <p>▶ Zum Zoomen <span class="bold">Strg</span> drücken</p>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <p><span class="bold">Beschreibung:</span> {{ jobangebot.beschreibung }}</p>
+          <p><span class="bold">Voraussetzungen:</span> {{ jobangebot.voraussetzungen }}</p>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="filter_jobangebote_kennwortsuche" value="{{ filter_jobangebote_kennwortsuche }}">
+          <input type="hidden" name="filter_jobangebote_bereich" value="{{ filter_jobangebote_bereich }}">
+          <input type="hidden" name="filter_ausbildungen_kennwortsuche" value="{{ filter_ausbildungen_kennwortsuche }}">
+          <input type="hidden" name="filter_ausbildungen_bereich" value="{{ filter_ausbildungen_bereich }}">
+          <input type="hidden" name="filter_studium_kennwortsuche" value="{{ filter_studium_kennwortsuche }}">
+          <input type="hidden" name="filter_studium_bereich" value="{{ filter_studium_bereich }}">
+          <input type="hidden" name="filter_studium_dual" value="{{ filter_studium_dual }}">
+          <input type="hidden" name="unternehmen_id" value="{{ jobangebot.unternehmen_id }}">
+          <input type="hidden" name="stelle_id" value="{{ jobangebot.stelle_id }}">
+          <input type="hidden" name="action" value="bewerben">
+          <div class="button_container">
+            <button class="button success" type="submit">Jetzt Bewerben</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+  {% for ausbildung in ausbildungen_liste %}
+    <div class="floating_bg" id="fw_ausbildung_{{ ausbildung.unternehmen_id }}_{{ ausbildung.stelle_id }}">
+      <div class="floating_window card">
+        <button class="button danger fw_close_button" onclick="closeWindow('ausbildung_{{ ausbildung.unternehmen_id }}_{{ ausbildung.stelle_id }}')">
+          <img src="{% static 'imgs/close_white.png' %}">
+        </button>
+        <div class="header">
+          <img src="{% static 'imgs/ausbildung.png' %}">
+          <h1>{{ ausbildung.bezeichnung }} (Ausbildung)</h1>
+        </div>
+        <div class="card_row">
+          <div>
+            <p><span class="bold">Arbeitgeber:</span> {{ ausbildung.unternehmen_name }}</p>
+            <p><span class="bold">Adresse:</span> {{ ausbildung.unternehmen_adresse }}</p>
+            <hr>
+            <p><span class="bold">Bereiche:</span> {{ ausbildung.bereiche|join:", " }}</p>
+            <p><span class="bold">Gehalt:</span> {{ ausbildung.gehalt_str }} € / Monat</p>
+            <p><span class="bold">Dauer:</span> {{ ausbildung.dauer }} Monate</p>
+          </div>
+          <div class="map_container">
+            <div class="map" id="ausbildung_{{ ausbildung.unternehmen_id }}_{{ ausbildung.stelle_id }}_map"></div>
+            <p>▶ Zum Zoomen <span class="bold">Strg</span> drücken</p>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <p><span class="bold">Beschreibung:</span> {{ ausbildung.beschreibung }}</p>
+          <p><span class="bold">Voraussetzungen:</span> {{ ausbildung.voraussetzungen }}</p>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="filter_jobangebote_kennwortsuche" value="{{ filter_jobangebote_kennwortsuche }}">
+          <input type="hidden" name="filter_jobangebote_bereich" value="{{ filter_jobangebote_bereich }}">
+          <input type="hidden" name="filter_ausbildungen_kennwortsuche" value="{{ filter_ausbildungen_kennwortsuche }}">
+          <input type="hidden" name="filter_ausbildungen_bereich" value="{{ filter_ausbildungen_bereich }}">
+          <input type="hidden" name="filter_studium_kennwortsuche" value="{{ filter_studium_kennwortsuche }}">
+          <input type="hidden" name="filter_studium_bereich" value="{{ filter_studium_bereich }}">
+          <input type="hidden" name="filter_studium_dual" value="{{ filter_studium_dual }}">
+          <input type="hidden" name="unternehmen_id" value="{{ ausbildung.unternehmen_id }}">
+          <input type="hidden" name="stelle_id" value="{{ ausbildung.stelle_id }}">
+          <input type="hidden" name="action" value="bewerben">
+          <div class="button_container">
+            <button button class="button success" type="submit">Jetzt Bewerben</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+  {% for studium in studium_liste %}
+    <div class="floating_bg" id="fw_studium_{{ studium.unternehmen_id }}_{{ studium.stelle_id }}">
+      <div class="floating_window card">
+        <button class="button danger fw_close_button" onclick="closeWindow('studium_{{ studium.unternehmen_id }}_{{ studium.stelle_id }}')">
+          <img src="{% static 'imgs/close_white.png' %}">
+        </button>
+        <div class="header">
+          <img src="{% static 'imgs/studium.png' %}">
+          <h1>{{ studium.bezeichnung }} (Studium)</h1>
+        </div>
+        <div class="card_row">
+          <div>
+            <p><span class="bold">Hochschule:</span> {{ studium.unternehmen_name }}</p>
+            <p><span class="bold">Adresse:</span> {{ studium.unternehmen_adresse }}</p>
+            <hr>
+            <p><span class="bold">Bereiche:</span> {{ studium.bereiche|join:", " }}</p>
+            {% if studium.art == 'studium' %}
+              <p><span class="bold">Studienform:</span> Vollzeitstudium</p>
+            {% else %}
+              <p><span class="bold">Studienform:</span> Duales Studium</p>
+              <p><span class="bold">Gehalt:</span> {{ studium.gehalt_str }} € / Monat</p>
+            {% endif %}
+            <p><span class="bold">Dauer:</span> {{ studium.dauer }} Monate</p>
+          </div>
+          <div class="map_container">
+            <div class="map" id="studium_{{ studium.unternehmen_id }}_{{ studium.stelle_id }}_map"></div>
+            <p>▶ Zum Zoomen <span class="bold">Strg</span> drücken</p>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <p><span class="bold">Beschreibung:</span> {{ studium.beschreibung }}</p>
+          <p><span class="bold">Voraussetzungen:</span> {{ studium.voraussetzungen }}</p>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="filter_jobangebote_kennwortsuche" value="{{ filter_jobangebote_kennwortsuche }}">
+          <input type="hidden" name="filter_jobangebote_bereich" value="{{ filter_jobangebote_bereich }}">
+          <input type="hidden" name="filter_ausbildungen_kennwortsuche" value="{{ filter_ausbildungen_kennwortsuche }}">
+          <input type="hidden" name="filter_ausbildungen_bereich" value="{{ filter_ausbildungen_bereich }}">
+          <input type="hidden" name="filter_studium_kennwortsuche" value="{{ filter_studium_kennwortsuche }}">
+          <input type="hidden" name="filter_studium_bereich" value="{{ filter_studium_bereich }}">
+          <input type="hidden" name="filter_studium_dual" value="{{ filter_studium_dual }}">
+          <input type="hidden" name="unternehmen_id" value="{{ studium.unternehmen_id }}">
+          <input type="hidden" name="stelle_id" value="{{ studium.stelle_id }}">
+          <input type="hidden" name="action" value="bewerben">
+          <div class="button_container">
+            <button class="button success" type="submit">Jetzt Bewerben</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/jobboerse.png' %}">
+      <h1>Deine Jobbörse</h1>
+    </div>
+    <p>In der Jobbörse findest du zahlreiche aktuelle Stellenangebote, die genau zu deinem Profil passen. Du kannst gezielt nach Tätigkeiten in deiner Region oder nach bestimmten Themenbereichen suchen und dir passende Vorschläge anzeigen lassen. Filtere nach Beschäftigungsart, Erfahrungsniveau oder Arbeitgeber, um schnell relevante Ergebnisse zu erhalten. Jede Stellenanzeige enthält wichtige Informationen zu Aufgaben, Anforderungen und Bewerbungsfristen. Wenn dich ein Job interessiert, kannst du dich direkt über die Plattform bewerben. So sparst du Zeit und behältst stets den Überblick über neue berufliche Möglichkeiten in deiner Umgebung.</p>
+  </div>
+  {% if aktuelle_beschaeftigung in "tot,rente,haft,kind" %}
+    <div class="card">
+      <div class="header">
+        <img src="{% static 'imgs/error.png' %}">
+        <h1>Aktuell nicht erwerbsfähig</h1>
+      </div>
+      <p>Da du aktuell nicht erwerbsfähig bist, kannst du dich leider nicht auf Stellenangebote, Ausbildungsplätze oder Studienplätze bewerben. Sobald sich dein Status ändert und du wieder erwerbsfähig bist, steht dir die Jobbörse selbstverständlich wieder zur Verfügung.</p>
+      <p>
+        Dein aktueller Status:
+        {% if aktuelle_beschaeftigung == "tot" %}
+          <span class="bold">Tot</span>
+        {% elif aktuelle_beschaeftigung == "rente" %}
+          <span class="bold">Im Ruhestand</span>
+        {% elif aktuelle_beschaeftigung == "haft" %}
+          <span class="bold">In Haft</span>
+        {% elif aktuelle_beschaeftigung == "kind" %}
+          <span class="bold">Kind (unter {{ kind_alter }} Jahre)</span>
+        {% endif %}
+      </p>
+    </div>
+  {% elif aktuelle_beschaeftigung == "berufsverbot" %}
+    <div class="card">
+      <div class="header">
+        <img src="{% static 'imgs/warning.png' %}">
+        <h1>Berufsverbot</h1>
+      </div>
+      <p>Da du auf Grund einer Vorstrafe ein Berufsverbot hast, kannst du dich leider nicht auf Stellenangebote, Ausbildungsplätze oder Studienplätze bestimmter Berufe bewerben. Deshalb erscheinen diese Berufe nicht in deiner Jobbörse.</p>
+      <p>Dein aktueller Status: <span class="bold">Berufsverbot</span></p>
+    </div>
+  {% endif %}
+  {% if aktuelle_beschaeftigung is None or aktuelle_beschaeftigung == "berufsverbot" %}
+    <div class="card" id="jobangebote">
+      <div class="header">
+        <img src="{% static 'imgs/arbeit.png' %}">
+        <h1>Jobangebote</h1>
+      </div>
+      <form class="table_filter" method="post" action="{% url 'buerger/jobboerse' %}#jobangebote">
+        {% csrf_token %}
+        <div class="table_group">
+          <label for="jobangebote_kennwortsuche_id">Kennwortsuche</label>
+          <input type="text" placeholder="Suche..." id="jobangebote_kennwortsuche_id" name="filter_jobangebote_kennwortsuche" value="{{ filter_jobangebote_kennwortsuche }}">
+        </div>
+        <div class="table_group">
+          <label for="jobangebote_bereich_id">Bereich</label>
+          <select name="filter_jobangebote_bereich" id="jobangebote_bereich_id">
+            <option value="all" {% if filter_jobangebote_bereich == "all" %}selected{% endif %}>Alle</option>
+            {% for bereich in jobangebote_bereiche_filter_liste %}
+              <option value="{{ bereich|lower }}" {% if filter_jobangebote_bereich|lower == bereich|lower %}selected{% endif %}>{{ bereich }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <input type="hidden" name="filter_ausbildungen_kennwortsuche" value="{{ filter_ausbildungen_kennwortsuche }}">
+        <input type="hidden" name="filter_ausbildungen_bereich" value="{{ filter_ausbildungen_bereich }}">
+        <input type="hidden" name="filter_studium_kennwortsuche" value="{{ filter_studium_kennwortsuche }}">
+        <input type="hidden" name="filter_studium_bereich" value="{{ filter_studium_bereich }}">
+        <input type="hidden" name="filter_studium_dual" value="{{ filter_studium_dual }}">
+        <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+        <button type="submit">
+          <img src="{% static 'imgs/search.png' %}">
+        </button>
+      </form>
+      <div class="table_container">
+        <table>
+          <thead>
+            <tr>
+              <th>Stellenbezeichung</th>
+              <th>Arbeitgeber</th>
+              <th>Adresse</th>
+              <th>Bereiche</th>
+              <th>Gehalt</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for jobangebot in jobangebote_liste %}
+              <tr>
+                <td>{{ jobangebot.bezeichnung }}</td>
+                <td>{{ jobangebot.unternehmen_name }}</td>
+                <td>{{ jobangebot.unternehmen_adresse }}</td>
+                <td>{{ jobangebot.bereiche|join:", " }}</td>
+                <td>{{ jobangebot.gehalt_str }} € / Monat</td>
+                <td>
+                  <div class="table_buttons">
+                    {% if jobangebot.beworben %}
+                      <button class="button disabled">Bereits beworben</button>
+                    {% else %}
+                      <button class="button" onclick="openWindow('jobangebot_{{ jobangebot.unternehmen_id }}_{{ jobangebot.stelle_id }}'); createMap('jobangebot_{{ jobangebot.unternehmen_id }}_{{ jobangebot.stelle_id }}', '{{ jobangebot.unternehmen_coords.lat }}', '{{ jobangebot.unternehmen_coords.lng }}', '{{ jobangebot.unternehmen_name }}', '{{ jobangebot.unternehmen_adresse }}')">Details</button>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6"><span class="italic">Die Suche ergab keine freien Jobangebote</span></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card" id="ausbildungen">
+      <div class="header">
+        <img src="{% static 'imgs/ausbildung.png' %}">
+        <h1>Ausbildungen</h1>
+      </div>
+      <form class="table_filter" method="post" action="{% url 'buerger/jobboerse' %}#ausbildungen">
+        {% csrf_token %}
+        <input type="hidden" name="filter_jobangebote_kennwortsuche" value="{{ filter_jobangebote_kennwortsuche }}">
+        <input type="hidden" name="filter_jobangebote_bereich" value="{{ filter_jobangebote_bereich }}">
+        <div class="table_group">
+          <label for="ausbildungen_kennwortsuche_id">Kennwortsuche</label>
+          <input type="text" placeholder="Suche..." id="ausbildungen_kennwortsuche_id" name="filter_ausbildungen_kennwortsuche" value="{{ filter_ausbildungen_kennwortsuche }}">
+        </div>
+        <div class="table_group">
+          <label for="ausbildungen_bereich_id">Bereich</label>
+          <select name="filter_ausbildungen_bereich" id="ausbildungen_bereich_id">
+            <option value="all" {% if filter_ausbildungen_bereich == "all" %}selected{% endif %}>Alle</option>
+            {% for bereich in ausbildungen_bereiche_filter_liste %}
+              <option value="{{ bereich|lower }}" {% if filter_ausbildungen_bereich|lower == bereich|lower %}selected{% endif %}>{{ bereich }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <input type="hidden" name="filter_studium_kennwortsuche" value="{{ filter_studium_kennwortsuche }}">
+        <input type="hidden" name="filter_studium_bereich" value="{{ filter_studium_bereich }}">
+        <input type="hidden" name="filter_studium_dual" value="{{ filter_studium_dual }}">
+        <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+        <button type="submit">
+          <img src="{% static 'imgs/search.png' %}">
+        </button>
+      </form>
+      <div class="table_container">
+        <table>
+          <thead>
+            <tr>
+              <th>Ausbildungsberuf</th>
+              <th>Arbeitgeber</th>
+              <th>Adresse</th>
+              <th>Bereiche</th>
+              <th>Gehalt</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ausbildung in ausbildungen_liste %}
+              <tr>
+                <td>{{ ausbildung.bezeichnung }}</td>
+                <td>{{ ausbildung.unternehmen_name }}</td>
+                <td>{{ ausbildung.unternehmen_adresse }}</td>
+                <td>{{ ausbildung.bereiche|join:", " }}</td>
+                <td>{{ ausbildung.gehalt_str }} € / Monat</td>
+                <td>
+                  <div class="table_buttons">
+                    {% if ausbildung.beworben %}
+                      <button class="button disabled">Bereits beworben</button>
+                    {% else %}
+                      <button class="button" onclick="openWindow('ausbildung_{{ ausbildung.unternehmen_id }}_{{ ausbildung.stelle_id }}'); createMap('ausbildung_{{ ausbildung.unternehmen_id }}_{{ ausbildung.stelle_id }}', '{{ ausbildung.unternehmen_coords.lat }}', '{{ ausbildung.unternehmen_coords.lng }}', '{{ ausbildung.unternehmen_name }}', '{{ ausbildung.unternehmen_adresse }}')">Details</button>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6"><span class="italic">Die Suche ergab keine freien Ausbildungsplätze</span></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card" id="studium">
+      <div class="header">
+        <img src="{% static 'imgs/studium.png' %}">
+        <h1>Studium</h1>
+      </div>
+      <form class="table_filter" method="post" action="{% url 'buerger/jobboerse' %}#studium">
+        {% csrf_token %}
+        <input type="hidden" name="filter_jobangebote_kennwortsuche" value="{{ filter_jobangebote_kennwortsuche }}">
+        <input type="hidden" name="filter_jobangebote_bereich" value="{{ filter_jobangebote_bereich }}">
+        <input type="hidden" name="filter_ausbildungen_kennwortsuche" value="{{ filter_ausbildungen_kennwortsuche }}">
+        <input type="hidden" name="filter_ausbildungen_bereich" value="{{ filter_ausbildungen_bereich }}">
+        <div class="table_group">
+          <label for="studium_kennwortsuche_id">Kennwortsuche</label>
+          <input type="text" placeholder="Suche..." id="studium_kennwortsuche_id" name="filter_studium_kennwortsuche" value="{{ filter_studium_kennwortsuche }}">
+        </div>
+        <div class="table_group">
+          <label for="studium_bereich_id">Bereich</label>
+          <select name="filter_studium_bereich" id="studium_bereich_id">
+            <option value="all" {% if filter_studium_bereich == "all" %}selected{% endif %}>Alle</option>
+            {% for bereich in studium_bereiche_filter_liste %}
+              <option value="{{ bereich|lower }}" {% if filter_studium_bereich|lower == bereich|lower %}selected{% endif %}>{{ bereich }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="table_group">
+          <label for="studium_dual_id">Duales Studium</label>
+          <select name="filter_studium_dual" id="studium_dual_id">
+            <option value="all" {% if filter_studium_dual == "all" %}selected{% endif %}>Alle</option>
+            <option value="ja" {% if filter_studium_dual == "ja" %}selected{% endif %}>Ja</option>
+            <option value="nein" {% if filter_studium_dual == "nein" %}selected{% endif %}>Nein</option>
+          </select>
+        </div>
+        <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+        <button type="submit">
+          <img src="{% static 'imgs/search.png' %}">
+        </button>
+      </form>
+      <div class="table_container">
+        <table>
+          <thead>
+            <tr>
+              <th>Studiengang</th>
+              <th>Hochschule</th>
+              <th>Adresse</th>
+              <th>Bereiche</th>
+              <th>Studienform (Gehalt)</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for studium in studium_liste %}
+              <tr>
+                <td>{{ studium.bezeichnung }}</td>
+                <td>{{ studium.unternehmen_name }}</td>
+                <td>{{ studium.unternehmen_adresse }}</td>
+                <td>{{ studium.bereiche|join:", " }}</td>
+                {% if studium.gehalt_str != "0" and studium.gehalt_str %}
+                  <td>Duales Studium ({{ studium.gehalt_str }} € / Monat)</td>
+                {% else %}
+                  <td>Vollzeitstudium</td>
+                {% endif %}
+                <td>
+                  <div class="table_buttons">
+                    {% if studium.beworben %}
+                      <button class="button disabled">Bereits beworben</button>
+                    {% else %}
+                      <button class="button" onclick="openWindow('studium_{{ studium.unternehmen_id }}_{{ studium.stelle_id }}'); createMap('studium_{{ studium.unternehmen_id }}_{{ studium.stelle_id }}', '{{ studium.unternehmen_coords.lat }}', '{{ studium.unternehmen_coords.lng }}', '{{ studium.unternehmen_name }}', '{{ studium.unternehmen_adresse }}')">Details</button>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6"><span class="italic">Die Suche ergab keine freien Studiumsplätze</span></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+
+{% endblock %}

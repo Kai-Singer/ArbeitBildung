@@ -1,0 +1,24 @@
+# In diese Dateien hat JEDER Dinge über den Python-Code hinzugefügt. Es kann nicht differenziert werden.
+
+{
+  "id": "b0001",
+  "aktiv": true,
+  "name": "Oscar-Walcker-Schule",
+  "schulart": "Berufsschule",
+  "adresse": "Römerhügelweg 53, 71636 Ludwigsburg",
+  "plaetze_gesamt": 40,
+  "dauer": "3",
+  "schueler": [
+    {
+      "id": "e293c737-7991-4ef5-9128-35a582e82574"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "System",
+      "beschreibung": "Neuer Schüler: Elias Becker",
+      "verlinkung": "/bildungseinrichtungen/schueler",
+      "status": true
+    }
+  ]
+}

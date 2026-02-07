@@ -1,0 +1,74 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Postfach - Admin{% endblock %}
+
+{% block header_title %}Postfach - Admin{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/brief.png' %}">
+      <h1>Dein Postfach</h1>
+    </div>
+    <p>Dein Postfach dient als zentrale Kommunikationsstelle für alle administrativen Vorgänge deiner Organisation. Hier erhältst du wichtige Systembenachrichtigungen, Rückmeldungen von Unternehmen, interne Hinweise sowie Mitteilungen zu laufenden Prozessen. Alle Nachrichten sind klar strukturiert, damit du schnell findest, was relevant ist. Du kannst neue Mitteilungen sofort öffnen, beantworten oder für später archivieren, um jederzeit Ordnung zu bewahren. So stellst du sicher, dass keine wichtigen Informationen verloren gehen und du auf Anfragen zeitnah reagieren kannst. Das Postfach unterstützt dich dabei, effizient zu kommunizieren und administrative Abläufe reibungslos zu koordinieren.</p>
+  </div>
+
+  <div class="actions">
+    <form method="post">
+      {% csrf_token %}
+        <input type="hidden" name="alle_gelesen"> 
+        <button type="submit" class="action_item">Alle als gelesen markieren</button>
+    </form>
+  </div>
+
+  {% for eintrag in postfach %}
+  <div class="card">
+    <div class="header">
+      <h1>{{ eintrag.sender }}</h1>
+    </div>
+    
+    <p>{{ eintrag.beschreibung }}</p>
+
+    <div class="button_container">
+      {% if eintrag.status %}
+        <form method="post">
+          {% csrf_token %}
+            <input type="hidden" name="index" value="{{ forloop.counter0 }}">
+            <button type="submit" class="button success">Als gelesen markieren</button>
+        </form>
+      {% else %}
+      <div class="button disabled">
+        <p>Als gelesen markiert</p>
+      </div>
+      {% endif %}
+
+      <button class="button" onclick="toggleAntwort('{{ forloop.counter0 }}')">
+        Antworten
+      </button>
+
+    </div>
+      <form method="post" id="antwort-{{ forloop.counter0 }}" class="table_filter" style="display:none; margin-top:20px;">
+          {% csrf_token %}
+          <input type="hidden" name="antwort_index" value="{{ forloop.counter0 }}">
+          <input type="hidden" name="ziel" value="{{ eintrag.sender }}">
+
+          <div class="table_group">
+            <label>Antwort</label>
+            <textarea name="antwort_text" placeholder="Deine Antwort..." required></textarea>
+          </div>
+          <div class="button_container">
+            <button class="button success">Antwort senden</button>
+          </div>
+      </form>
+  </div>
+  {% endfor %}
+  <script>
+  function toggleAntwort(id) {
+    const form = document.getElementById("antwort-" + id);
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+  }
+  </script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "id": "e293c737-7991-4ef5-9128-35a582e82574",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-10",
+      "ende": "2029-01-10",
+      "art": "schueler",
+      "bildungseinrichtung": "b0001",
+      "arbeitgeber": false,
+      "stelle": false,
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [],
+  "postfach": []
+}

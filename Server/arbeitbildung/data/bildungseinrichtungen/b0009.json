@@ -1,0 +1,35 @@
+{
+  "id": "b0009",
+  "aktiv": true,
+  "name": "Kindertagesstätte Schatzkiste",
+  "schulart": "Kindergarten",
+  "adresse": "Lorenzstraße 7, 70435 Stuttgart",
+  "plaetze_gesamt": "10",
+  "dauer": "3",
+  "schueler": [],
+  "postfach": [
+    {
+      "sender": "Ich",
+      "beschreibung": "Schüler: sergsdrg sadfg erfolgreich rausgeschmissen",
+      "verlinkung": "/bildungseinrichtungen/schueler",
+      "status": true
+    },
+    {
+      "sender": "System",
+      "beschreibung": "Neuer Schüler: sergsdrg sadfg",
+      "verlinkung": "/bildungseinrichtungen/schueler",
+      "status": true
+    },
+    {
+      "sender": "sergsdrg sadfg",
+      "beschreibung": "Hat das Verhältnis für Bildungseinrichtung b0009 beendet. Schüler wurde abgemeldet.",
+      "status": true
+    },
+    {
+      "sender": "System",
+      "beschreibung": "Neuer Schüler: sergsdrg sadfg",
+      "verlinkung": "/bildungseinrichtungen/schueler",
+      "status": true
+    }
+  ]
+}

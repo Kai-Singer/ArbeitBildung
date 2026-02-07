@@ -1,0 +1,155 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}
+<script>
+  function resetForm(button) {
+    const form = button.closest("form");
+    if (!form) return;
+
+    const inputs = form.querySelectorAll('input:not([type="hidden"])');
+    inputs.forEach(input => {
+      input.value = "";
+    });
+
+    const selects = form.querySelectorAll("select");
+    selects.forEach(select => {
+      select.value = "all";
+    });
+
+    form.submit();
+  }
+</script>
+{% endblock %}
+{% block page_title %}Mitarbeiter - Unternehmen{% endblock %}
+
+{% block header_title %}Mitarbeiter - Unternehmen{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/menschen.png' %}">
+      <h1>Deine Mitarbeiter</h1>
+    </div>
+    <p>Willkommen auf der Unternehmensseite Mitarbeiter. Dieses Portal bietet dir eine strukturierte Übersicht und zentrale Verwaltung aller aktuellen Beschäftigten. Über die flexible Such- und Filterfunktion kannst du schnell Mitarbeiter nach Namen, Stellenbezeichnung oder Fachbereich finden (z.B. Öffentliche Verwaltung, Sozialwesen). Die Tabelle "Aktuelle Mitarbeiter" listet alle relevanten Daten auf, einschließlich Gehalt und Einstellungsdatum. Über die Aktionsspalte hast du direkten Zugriff auf wichtige Prozesse. Hier kannst du Arbeitszeugnisse bearbeiten oder den Entlassungsprozess steuern. Das Mitarbeiter-Portal ist dein effizientes Werkzeug für die laufende Personalverwaltung.</p>
+  </div>
+  <div class="card" id="mitarbeitende">
+    <div class="header">
+      <img src="{% static 'imgs/ablage.png' %}">
+      <h1>Aktuelle Mitarbeiter</h1>
+    </div>
+    <form class="table_filter" method="post" action="{% url 'unternehmen/mitarbeiter' %}#mitarbeitende">
+      {% csrf_token %}
+      <div class="table_group">
+        <label for="mitarbeitende_kennwortsuche_id">Kennwortsuche</label>
+        <input type="text" placeholder="Suche..." id="mitarbeitende_kennwortsuche_id" name="filter_mitarbeitende_kennwortsuche"value="{{ filter_mitarbeitende_kennwortsuche }}">
+      </div>
+      <div class="table_group">
+        <label for="mitarbeitende_bereich_id">Bereich</label>
+        <select name="filter_mitarbeitende_bereich" id="mitarbeitende_bereich_id">
+          <option value="all" {% if filter_mitarbeitende_bereich == "all" %}selected{% endif %}>Alle</option>
+          {% for bereich in mitarbeitende_bereiche_filter_liste %}
+            <option value="{{ bereich|lower }}" {% if filter_mitarbeitende_bereich|lower == bereich|lower %}selected{% endif %}>{{ bereich }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+      <button type="submit">
+        <img src="{% static 'imgs/search.png' %}">
+      </button>
+    </form>
+    <div class="table_container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Stellenbezeichnung</th>
+            <th>Bereich</th>
+            <th>Gehalt</th>
+            <th>Einstellungsdatum</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mensch in mitarbeiter %}
+            <tr>
+              <td>{{ mensch.name }}</td>
+              <td>{{ mensch.bezeichnung }}</td>
+              <td>{{ mensch.bereiche }}</td>
+              <td>{{ mensch.gehalt }} €</td>
+              <td>{{ mensch.einstellungsdatum }}</td>
+              <td>
+                <div class="table_buttons">
+                  <button class="button" onclick="openWindow('stelle_{{ mensch.stellenID }}')">Stelle bearbeiten</button>
+                  <button class="button" onclick="openWindow('zeugnis_{{ mensch.stellenID }}')">Zeugnis bearbeiten</button>
+                  <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="stellenID" value="{{ mensch.stellenID}}">
+                    <button class="button danger" name="aktion" value="entlassen">Entlassen</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="6">Keine Mitarbeiter vorhanden.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!--Gehalt der Stelle bearbeiten-->
+{% for mensch in mitarbeiter %}
+<div class="floating_bg" id="fw_stelle_{{ mensch.stellenID }}">
+  <div class="floating_window card">
+
+    <button class="button danger fw_close_button" onclick="closeWindow('stelle_{{ mensch.stellenID }}')">
+      <img src="{% static 'imgs/close_white.png' %}">
+    </button>
+
+    <div class="header">
+      <img src="{% static 'imgs/bearbeiten.png' %}">
+      <h1>Stelle bearbeiten - {{ mensch.bezeichnung }}</h1>
+    </div>
+    <form method="post" class="fw_form table_filter no_mb"> <!-- Wendet die Styles der Tabellen Filter an und entfernt das untere Margin -->
+      {% csrf_token %}
+      <input type="hidden" name="stellenID" value="{{ mensch.stellenID }}">
+      <div class="table_group"> <!-- Setzt Label und Input untereinander wie den Tabellen Filtern -->
+        <label>Gehalt (€)</label>
+        <input type="number" name="gehalt" step="1" value="{{ mensch.gehalt }}">
+      </div>
+      <button class="button success" name="aktion" value="stelle_bearbeiten">Speichern</button>
+    </form>
+  </div>
+</div>
+
+<!--Zeugnis bearbeiten-->
+<div class="floating_bg" id="fw_zeugnis_{{ mensch.stellenID }}">
+  <div class="floating_window card">
+    <button class="button danger fw_close_button" onclick="closeWindow('zeugnis_{{ mensch.stellenID }}')">
+      <img src="{% static 'imgs/close_white.png' %}">
+    </button>
+    <div class="header">
+      <img src="{% static 'imgs/zeugnis.png' %}">
+      <h1>Zeugnis bearbeiten – {{ mensch.name }}</h1>
+    </div>
+    <form method="post" class="fw_form table_filter no_mb">
+      {% csrf_token %}
+      <input type="hidden" name="stellenID" value="{{ mensch.stellenID }}">
+      <input type="hidden" name="buergerID" value="{{ mensch.buergerID }}">
+      <div class="table_group">
+        <label>Beschreibung</label>
+        <textarea name="beschreibung" rows="5">{{ mensch.zeugnis_beschreibung }}</textarea>
+      </div>
+      <div class="table_group">
+        <label>Abschlussnote</label>
+        <input type="number" step="0.1" name="abschlussnote" value="{{ mensch.abschlussnote }}">
+      </div>
+      <button class="button success" name="aktion" value="zeugnis_bearbeiten">
+        Speichern
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endfor %}
+{% endblock %}

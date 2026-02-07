@@ -1,0 +1,241 @@
+# In diese Dateien hat JEDER Dinge über den Python-Code hinzugefügt. Es kann nicht differenziert werden.
+
+{
+  "id": "u0001",
+  "aktiv": true,
+  "name": "Stadtverwaltung Waiblingen",
+  "adresse": "Kurze Str. 33, 71332 Waiblingen",
+  "stellen": [
+    {
+      "id": "s0001",
+      "aktiv": true,
+      "bezeichnung": "Beamter",
+      "beschreibung": "Die Stelle umfasst die eigenständige Bearbeitung von Verwaltungsverfahren von der Antragstellung bis zur Entscheidung. Dazu gehören die Prüfung von Unterlagen, die Anwendung gesetzlicher Vorschriften sowie die Erstellung rechtssicherer Bescheide. Zusätzlich erfolgt die Beratung von Bürgerinnen und Bürgern in persönlichen, telefonischen und schriftlichen Angelegenheiten. Die Mitarbeit an internen Verwaltungsprozessen und Projekten rundet das Aufgabengebiet ab.",
+      "bereiche": [
+        "Allgemeine Verwaltung",
+        "Bürgerdienste",
+        "Organisation"
+      ],
+      "voraussetzungen": "Abgeschlossene Laufbahnausbildung im gehobenen nichttechnischen Verwaltungsdienst oder vergleichbare Qualifikation mit Kenntnissen im Verwaltungsrecht.",
+      "gehalt": 3800,
+      "buerger": "2a445e84-d239-439b-bc11-7a3c62f4eefd",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0002",
+      "aktiv": true,
+      "bezeichnung": "Beamter",
+      "beschreibung": "In dieser Position wirken Sie aktiv an der Aufstellung, Ausführung und Überwachung des Haushaltsplans mit. Sie prüfen Einnahmen und Ausgaben auf Recht- und Zweckmäßigkeit, erstellen Auswertungen und unterstützen bei Jahresabschlüssen. Darüber hinaus beraten Sie Fachbereiche in haushaltsrechtlichen Fragestellungen und wirken an der Weiterentwicklung von Controlling- und Steuerungsinstrumenten mit.",
+      "bereiche": [
+        "Finanzen",
+        "Haushalt",
+        "Rechnungswesen"
+      ],
+      "voraussetzungen": "Laufbahnbefähigung für den gehobenen Verwaltungsdienst sowie Kenntnisse im Haushalts- und Vergaberecht.",
+      "gehalt": 8000,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0003",
+      "aktiv": true,
+      "bezeichnung": "Beamter",
+      "beschreibung": "Das Aufgabengebiet beinhaltet die Bearbeitung ordnungsrechtlicher Sachverhalte und die Durchführung von Maßnahmen zur Gefahrenabwehr. Sie überwachen die Einhaltung gesetzlicher und kommunaler Vorschriften, treffen eigenständige Entscheidungen und arbeiten eng mit Polizei, Feuerwehr und weiteren Behörden zusammen. Ein Teil der Tätigkeit findet im Außendienst statt und erfordert situationsgerechtes Handeln.",
+      "bereiche": [
+        "Ordnungswesen",
+        "Sicherheit",
+        "Außendienst"
+      ],
+      "voraussetzungen": "Laufbahnbefähigung für den mittleren oder gehobenen Verwaltungsdienst sowie Entscheidungsfähigkeit und Belastbarkeit.",
+      "gehalt": 3500,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0004",
+      "aktiv": true,
+      "bezeichnung": "Verwaltungsfachangestellter",
+      "beschreibung": "Während der Ausbildung lernen Sie die vielfältigen Aufgaben einer Stadtverwaltung kennen. Sie bearbeiten Bürgeranliegen, wirken bei Verwaltungsverfahren mit und unterstützen die Erstellung von Bescheiden. Zudem erhalten Sie Einblicke in unterschiedliche Fachbereiche wie Bürgerbüro, Personal, Finanzen und Ordnungswesen. Die Ausbildung verbindet praktische Mitarbeit in den Ämtern mit theoretischem Unterricht an der Berufsschule und am Studieninstitut.",
+      "bereiche": [
+        "Allgemeine Verwaltung",
+        "Bürgerdienste",
+        "Personal",
+        "Finanzen"
+      ],
+      "voraussetzungen": "Mindestens mittlerer Schulabschluss, Interesse an rechtlichen und organisatorischen Aufgaben sowie sorgfältige Arbeitsweise und Teamfähigkeit.",
+      "gehalt": 1200,
+      "buerger": "",
+      "besetzt": false,
+      "art": "ausbildung",
+      "dauer": 36
+    },
+    {
+      "id": "s0005",
+      "aktiv": true,
+      "bezeichnung": "Public Management (B.A.)",
+      "beschreibung": "Das duale Studium kombiniert ein wissenschaftliches Studium mit praxisnahen Ausbildungsphasen in der Stadtverwaltung. Studierende lernen, Verwaltungsprozesse rechtlich, organisatorisch und wirtschaftlich zu steuern. In den Praxisphasen werden Aufgaben in verschiedenen Ämtern übernommen, z. B. in der Rechtsanwendung, im Finanzwesen oder in der Organisation. Ziel ist die Qualifikation für verantwortungsvolle Tätigkeiten im gehobenen Verwaltungsdienst.",
+      "bereiche": [
+        "Public Management",
+        "Verwaltung",
+        "Recht",
+        "Organisation"
+      ],
+      "voraussetzungen": "Allgemeine Hochschulreife oder Fachhochschulreife, Interesse an Verwaltung und Recht sowie selbstständige und strukturierte Arbeitsweise.",
+      "gehalt": 1500,
+      "buerger": "",
+      "besetzt": false,
+      "art": "duales_studium",
+      "dauer": 36
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerber": "2a445e84-d239-439b-bc11-7a3c62f4eefd",
+      "stelle": "s0001",
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "stelle": "s0004",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": "2026-01-12",
+      "status": "zurückgezogen"
+    },
+    {
+      "bewerber": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": false,
+      "status": "offen"
+    },
+    {
+      "bewerber": "e73fae0f-44cf-4e5a-9090-cf20651a4d99",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-14",
+      "rückmeldedatum": "2026-01-14",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Tobias Richter",
+      "beschreibung": "Mitarbeiter abgemeldet (arbeitslos). Stelle 'Beamter' (s0002) wurde freigegeben.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Tobias Richter",
+      "beschreibung": "Hat das Stellenangebot für Beamter (s0002) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "Tobias Richter",
+      "beschreibung": "Neue Bewerbung für Stelle Beamter (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat seine Bewerbung für Beamter (s0002) zurückgezogen.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat die Stelle  (s0002) gekündigt. Die Stelle ist nun wieder offen.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat das Verhältnis für Stelle Beamter (s0002) beendet. Stelle ist wieder frei.",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat seine Bewerbung für Beamter (s0002) zurückgezogen.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat seine Bewerbung für Beamter (s0002) zurückgezogen.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat das Stellenangebot für Beamter (s0002) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Neue Bewerbung für Stelle Beamter (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat das Verhältnis für Stelle Beamter (s0002) beendet. Stelle ist wieder frei.",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat das Stellenangebot für Beamter (s0002) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Neue Bewerbung für Stelle Beamter (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "beschreibung": "Hat das Verhältnis für Stelle s0004 beendet. Stelle ist wieder frei.",
+      "status": true
+    },
+    {
+      "sender": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "beschreibung": "Hat das Stellenangebot für Verwaltungsfachangestellter (s0004) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "beschreibung": "Neue Bewerbung für Stelle Verwaltungsfachangestellter (s0004).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "2a445e84-d239-439b-bc11-7a3c62f4eefd",
+      "beschreibung": "Hat das Stellenangebot für Beamter (s0001) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "2a445e84-d239-439b-bc11-7a3c62f4eefd",
+      "beschreibung": "Neue Bewerbung für Stelle Beamter (s0001).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    }
+  ]
+}

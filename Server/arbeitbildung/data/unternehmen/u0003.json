@@ -1,0 +1,183 @@
+{
+  "id": "u0003",
+  "aktiv": true,
+  "name": "Polizeipräsidium Ludwigsburg",
+  "adresse": "Danziger Straße 40, 71638 Ludwigsburg",
+  "stellen": [
+    {
+      "id": "s0001",
+      "aktiv": true,
+      "bezeichnung": "Polizist",
+      "beschreibung": "Als Polizeivollzugsbeamtin bzw. Polizeivollzugsbeamter sorgen Sie für die öffentliche Sicherheit und Ordnung. Sie verhindern Straftaten, verfolgen Gesetzesverstöße und stehen Bürgerinnen und Bürgern als Ansprechpartner zur Verfügung. Der Dienst umfasst präventive, operative und administrative Aufgaben im Innen- und Außendienst.",
+      "bereiche": [
+        "Streifendienst",
+        "Verkehrssicherheit",
+        "Kriminalitätsbekämpfung",
+        "Gefahrenabwehr",
+        "Ermittlungsdienst",
+        "Bürgerservice"
+      ],
+      "voraussetzungen": "Mindestalter 18 Jahre, Abgeschlossene Schulausbildung (mittlere Reife oder Abitur, je nach Laufbahn), Deutsche Staatsangehörigkeit oder EU-Staatsangehörigkeit, Körperliche und psychische Belastbarkeit, Erfolgreiches Bestehen des Auswahlverfahrens (Sporttest, Eignungstest, ärztliche Untersuchung), Einwandfreies Führungszeugnis, Bereitschaft zu Schicht- und Wochenenddienst",
+      "gehalt": 2800,
+      "buerger": "7f77bad6-58e5-4e6c-b19f-ad007e437ddc",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0002",
+      "aktiv": true,
+      "bezeichnung": "Polizist",
+      "beschreibung": "Kriminalpolizistinnen und Kriminalpolizisten sind für die Aufklärung schwerer und komplexer Straftaten zuständig. Sie führen Ermittlungen durch, sichern Beweise, vernehmen Zeuginnen, Zeugen und Beschuldigte und arbeiten eng mit Staatsanwaltschaften sowie anderen Behörden zusammen. Der Dienst erfolgt überwiegend im Ermittlungs- und Innendienst, kann jedoch auch Außeneinsätze umfassen.",
+      "bereiche": [
+        "Kriminalermittlungen",
+        "Spurensicherung",
+        "Vernehmungen",
+        "Organisierte Kriminalität",
+        "Cyberkriminalität",
+        "Wirtschaftsdelikte"
+      ],
+      "voraussetzungen": "Abgeschlossene Ausbildung im Polizeivollzugsdienst, Erfolgreicher Aufstieg oder Studium für den gehobenen Kriminaldienst, Sehr gute analytische Fähigkeiten, Sorgfältige und diskrete Arbeitsweise, Psychische Belastbarkeit, Teamfähigkeit und Kommunikationsstärke, Bereitschaft zu unregelmäßigen Arbeitszeiten",
+      "gehalt": 3000,
+      "buerger": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0003",
+      "aktiv": true,
+      "bezeichnung": "Polizist",
+      "beschreibung": "Verkehrspolizistinnen und Verkehrspolizisten überwachen den Straßenverkehr und sorgen für Sicherheit und Ordnung im öffentlichen Verkehrsraum. Sie kontrollieren Fahrzeuge und Verkehrsteilnehmende, nehmen Unfälle auf, regeln den Verkehr bei Großereignissen und setzen verkehrsrechtliche Maßnahmen durch. Zudem leisten sie Präventionsarbeit zur Unfallvermeidung.",
+      "bereiche": [
+        "Verkehrsüberwachung",
+        "Unfallaufnahme",
+        "Geschwindigkeitskontrollen",
+        "Verkehrslenkung",
+        "Präventionsarbeit",
+        "Gefahrenabwehr"
+      ],
+      "voraussetzungen": "Abgeschlossene Ausbildung im Polizeivollzugsdienst, Gültige Fahrerlaubnis Klasse B, Gute körperliche Belastbarkeit, Sicheres Auftreten und Durchsetzungsvermögen, Kommunikationsfähigkeit, Bereitschaft zu Schicht-, Nacht- und Wochenenddienst",
+      "gehalt": 2900,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0004",
+      "aktiv": true,
+      "bezeichnung": "Polizist",
+      "beschreibung": "Verkehrspolizistinnen und Verkehrspolizisten überwachen den Straßenverkehr und sorgen für Sicherheit und Ordnung im öffentlichen Verkehrsraum. Sie kontrollieren Fahrzeuge und Verkehrsteilnehmende, nehmen Unfälle auf, regeln den Verkehr bei Großereignissen und setzen verkehrsrechtliche Maßnahmen durch. Zudem leisten sie Präventionsarbeit zur Unfallvermeidung.",
+      "bereiche": [
+        "Verkehrsüberwachung",
+        "Unfallaufnahme",
+        "Geschwindigkeitskontrollen",
+        "Verkehrslenkung",
+        "Präventionsarbeit",
+        "Gefahrenabwehr"
+      ],
+      "voraussetzungen": "Abgeschlossene Ausbildung im Polizeivollzugsdienst, Gültige Fahrerlaubnis Klasse B, Gute körperliche Belastbarkeit, Sicheres Auftreten und Durchsetzungsvermögen, Kommunikationsfähigkeit, Bereitschaft zu Schicht-, Nacht- und Wochenenddienst",
+      "gehalt": 2900,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0005",
+      "aktiv": true,
+      "bezeichnung": "Polizeivollzugsbeamter",
+      "beschreibung": "Während der Ausbildung zur Polizeivollzugsbeamtin bzw. zum Polizeivollzugsbeamten werden die Anwärterinnen und Anwärter praxisnah auf den Polizeiberuf vorbereitet. Die Ausbildung kombiniert theoretischen Unterricht an der Polizeiakademie mit praktischen Einsätzen. Inhalte sind unter anderem Rechtskunde, Einsatztraining, Schießtraining, Sport sowie Kommunikation und Deeskalation",
+      "bereiche": [
+        "Rechtskunde",
+        "Einsatztraining",
+        "Schießausbildung",
+        "Sport",
+        "Praktischer Polizeidienst",
+        "Bürgerkommunikation"
+      ],
+      "voraussetzungen": "Mindestalter 18 Jahre, Mittlere Reife oder Abitur, Deutsche Staatsangehörigkeit oder EU-Staatsangehörigkeit, Körperliche und psychische Eignung, Erfolgreiches Bestehen des Auswahlverfahrens, Teamfähigkeit, Einwandfreies Führungszeugnis",
+      "gehalt": 1500,
+      "buerger": "",
+      "besetzt": false,
+      "art": "ausbildung",
+      "dauer": 30
+    },
+    {
+      "id": "s0006",
+      "aktiv": true,
+      "bezeichnung": "Polizeivollzugsdienst (B.A.)",
+      "beschreibung": "Im dualen Studium im Polizeivollzugsdienst verbindest du ein praxisnahes Studium mit abwechslungsreichen Einsätzen bei der Polizei. Du durchläufst theoretische Studienphasen an der Hochschule der Polizei sowie praktische Ausbildungsabschnitte bei verschiedenen Dienststellen. Dabei wirst du gezielt auf Aufgaben in den Bereichen Gefahrenabwehr, Strafverfolgung, Verkehrssicherheit und Einsatzdienst vorbereitet. Nach erfolgreichem Abschluss des Studiums wirst du als Polizeikommissar bzw. Polizeikommissarin eingesetzt.",
+      "bereiche": [
+        "Streifendienst",
+        "Kriminalitätsbekämpfung",
+        "Verkehrssicherheit",
+        "Gefahrenabwehr",
+        "Einsatzdienst",
+        "Verwaltung"
+      ],
+      "voraussetzungen": "Vorausgesetzt werden die Hochschul- oder Fachhochschulreife, die deutsche oder EU-Staatsangehörigkeit sowie die gesundheitliche und körperliche Eignung. Zudem sind das Bestehen des polizeilichen Auswahlverfahrens, Teamfähigkeit, Belastbarkeit und ein einwandfreies Führungszeugnis erforderlich.",
+      "gehalt": 1400,
+      "buerger": "",
+      "besetzt": false,
+      "art": "duales_studium",
+      "dauer": 36
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerber": "7f77bad6-58e5-4e6c-b19f-ad007e437ddc",
+      "stelle": "s0001",
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": "2026-01-14",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-14",
+      "rückmeldedatum": false,
+      "status": "offen"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat das Stellenangebot für Polizist (s0002) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Neue Bewerbung für Stelle Polizist (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Neue Bewerbung für Stelle Polizist (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "7f77bad6-58e5-4e6c-b19f-ad007e437ddc",
+      "beschreibung": "Hat das Stellenangebot für Polizist (s0001) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "7f77bad6-58e5-4e6c-b19f-ad007e437ddc",
+      "beschreibung": "Neue Bewerbung für Stelle Polizist (s0001).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    }
+  ]
+}

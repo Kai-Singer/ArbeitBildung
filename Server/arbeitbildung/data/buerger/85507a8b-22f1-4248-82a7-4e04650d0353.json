@@ -1,0 +1,125 @@
+{
+  "id": "85507a8b-22f1-4248-82a7-4e04650d0353",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-10",
+      "ende": "2026-01-12",
+      "art": "ausbildung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0001",
+      "stelle": "s0004",
+      "zeugnis": {}
+    },
+    {
+      "beginn": "2026-01-12",
+      "ende": "2026-01-12",
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0001",
+      "stelle": "s0002",
+      "zeugnis": {
+        "abschlussnote": 1.0,
+        "beschreibung": "Subba"
+      }
+    },
+    {
+      "beginn": "2026-01-12",
+      "ende": "2026-01-14",
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0001",
+      "stelle": "s0002",
+      "zeugnis": {}
+    },
+    {
+      "beginn": "2026-01-14",
+      "ende": false,
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0003",
+      "stelle": "s0002",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "arbeitgeber": "u0001",
+      "stelle": "s0004",
+      "status": "eingestellt"
+    },
+    {
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": "2026-01-14",
+      "arbeitgeber": "u0003",
+      "stelle": "s0002",
+      "status": "eingestellt"
+    },
+    {
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": false,
+      "arbeitgeber": "u0002",
+      "stelle": "s0005",
+      "status": "zurückgezogen"
+    },
+    {
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": "2026-01-12",
+      "arbeitgeber": "u0001",
+      "stelle": "s0002",
+      "status": "zurückgezogen"
+    },
+    {
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": false,
+      "arbeitgeber": "u0001",
+      "stelle": "s0002",
+      "status": "offen"
+    },
+    {
+      "bewerbungsdatum": "2026-01-14",
+      "rückmeldedatum": false,
+      "arbeitgeber": "u0003",
+      "stelle": "s0002",
+      "status": "offen"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Polizeipräsidium Ludwigsburg",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Polizeipräsidium Ludwigsburg für die Stelle Polizist angenommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    },
+    {
+      "sender": "Stadtverwaltung Waiblingen",
+      "beschreibung": "Sie wurden von dem Unternehmen Stadtverwaltung Waiblingen für die Stelle Beamter entlassen.",
+      "status": true
+    },
+    {
+      "sender": "Stadtverwaltung Waiblingen",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Stadtverwaltung Waiblingen für die Stelle Beamter angenommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    },
+    {
+      "sender": "Stadtverwaltung Waiblingen",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Stadtverwaltung Waiblingen für die Stelle Beamter angenommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    },
+    {
+      "sender": "Polizeipräsidium Ludwigsburg",
+      "beschreibung": "Leider wurde Ihre Bewerbung beim Unternehmen Polizeipräsidium Ludwigsburg für die Stelle Polizist abgelehnt.",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    },
+    {
+      "sender": "Stadtverwaltung Waiblingen",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Stadtverwaltung Waiblingen für die Stelle Verwaltungsfachangestellter anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

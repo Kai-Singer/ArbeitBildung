@@ -1,0 +1,77 @@
+[
+    {
+        "id": "b0001",
+        "name": "Oscar-Walcker-Schule",
+        "passwort": "123"
+    },
+    {
+        "id": "b0002",
+        "name": "Albertus-Magnus-Gymnasium",
+        "passwort": "123"
+    },
+    {
+        "id": "b0003",
+        "name": "Staufer-Gymnasium",
+        "passwort": "123"
+    },
+    {
+        "id": "b0004",
+        "name": "Königin-Katharina-Stift Gymnasium",
+        "passwort": "123"
+    },
+    {
+        "id": "b0005",
+        "name": "Gymnasien I und II im Ellental",
+        "passwort": "123"
+    },
+    {
+        "id": "b0006",
+        "name": "Kaufmännische Schule Waiblingen",
+        "passwort": "123"
+    },
+    {
+        "id": "b0007",
+        "name": "Lindenschule Hohenacker",
+        "passwort": "123"
+    },
+    {
+        "id": "b0008",
+        "name": "Kindertagesstätte Arche Noah",
+        "passwort": "123"
+    },
+    {
+        "id": "b0009",
+        "name": "Kindertagesstätte Schatzkiste",
+        "passwort": "123"
+    },
+    {
+        "id": "b0010",
+        "name": "Linden-Realschule",
+        "passwort": "123"
+    },
+    {
+        "id": "b0011",
+        "name": "Raitelsbergschule",
+        "passwort": "123"
+    },
+    {
+        "id": "b0012",
+        "name": "Theodor-Heuss-Realschule",
+        "passwort": "123"
+    },
+    {
+        "id": "b0013",
+        "name": "Silcherschule",
+        "passwort": "123"
+    },
+    {
+        "id": "b0014",
+        "name": "Schwabschule",
+        "passwort": "123"
+    },
+        {
+        "id": "b0015",
+        "name": "Katholischer Kindergarten St. Josef",
+        "passwort": "123"
+    }
+]

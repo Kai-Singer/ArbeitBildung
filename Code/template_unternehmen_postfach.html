@@ -1,0 +1,67 @@
+<!-- Leonie Waimer -->
+
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Postfach - Unternehmen{% endblock %}
+
+{% block header_title %}Postfach - Unternehmen{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/brief.png' %}">
+      <h1>Dein Postfach</h1>
+    </div>
+    <p>Dein Postfach ist der zentrale Hub für die gesamte externe und interne Kommunikation deines Unternehmensportals. Hier empfängst du alle relevanten Mitteilungen - insbesondere Bewerbungsbestätigungen, Rückmeldungen von Bewerbern und Anfragen aus dem Support-Bereich. Alle Nachrichten sind übersichtlich dargestellt, sodass du sofort siehst, welche Mitteilungen ungelesen sind und welche Aktionen erforderlich sind. Du kannst schnell auf Bewerberanfragen antworten, Benachrichtigungen archivieren und so eine effiziente Kommunikation gewährleisten. Das Postfach stellt sicher, dass du keine wichtige Interaktion im Recruiting- und Personalmanagement verpasst.</p>
+  </div>
+
+  <div class="actions">
+    <form method="post">
+      {% csrf_token %}
+        <input type="hidden" name="alle_gelesen"> 
+        <button type="submit" class="action_item">Alle als gelesen markieren</button>
+    </form>
+  </div>
+
+  {% for eintrag in postfach %}
+  <div class="card">
+    <div class="header">
+      <h1>{{ eintrag.sender }}</h1>
+    </div>
+    <p>{{ eintrag.beschreibung }}</p>
+
+    <div class="button_container">
+
+      {% if eintrag.verlinkung %}
+      <div class="button">
+        <a href="{{ eintrag.verlinkung }}">
+          {% if "bewerber" in eintrag.verlinkung %}
+            Bewerber
+          {% elif "mitarbeiter" in eintrag.verlinkung %}
+            Mitarbeiter
+          {% else %}
+            Zur Seite
+          {% endif %}
+        </a>
+      </div>
+      {% endif %}
+
+      {% if eintrag.status %}
+        <form method="post">
+          {% csrf_token %}
+            <input type="hidden" name="index" value="{{ forloop.counter0 }}">
+            <button type="submit" class="button success">Als gelesen markieren</button>
+        </form>
+      {% else %}
+      <div class="button disabled">
+        <p>Als gelesen markiert</p>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

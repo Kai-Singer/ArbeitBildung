@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="{% static 'imgs/logo.png' %}" type="image/png">
+  <link rel="stylesheet" href="{% static 'css/main_style.css' %}?v=2">
+  {% block extra_stylesheets %}{% endblock %}
+  {% block extra_scripts %}{% endblock %}
+  <script>
+    const staticImgsPrefix = "{% static 'imgs/' %}"
+  </script>
+  <script src="{% static 'js/navbar_script.js' %}?v=2" defer></script>
+  <script src="{% static 'js/messages_script.js' %}?v=2" defer></script>
+  <script src="{% static 'js/floating_window_script.js' %}?v=2" defer></script>
+  <title>{% block page_title %}Arbeit & Bildung{% endblock %}</title>
+</head>
+<body>
+  <div class="navbar shown">
+    <div class="navbar_hide_button">
+      <img src="{% static 'imgs/close.png' %}">
+    </div>
+    <h1>Arbeit & Bildung</h1>
+    <img src="{% static 'imgs/crane_top.png' %}" class="crane_top" draggable="false" >
+    <div class="mast"></div>
+    <div class="menu_items">
+      <div class="string"></div>
+      <div class="highlight">
+        <img src="{% static 'imgs/crane_hook.png' %}" class="crane_hook" draggable="false" >
+      </div>
+      {% if role == 'buerger' %}
+        <a class="menu_item {% if active_page == 'buerger_dashboard' %}selected{% endif %}" href="{% url 'buerger/dashboard' %}">Dashboard</a>
+        <a class="menu_item {% if active_page == 'buerger_lebenslauf' %}selected{% endif %}" href="{% url 'buerger/lebenslauf' %}">Lebenslauf</a>
+        <a class="menu_item {% if active_page == 'buerger_jobboerse' %}selected{% endif %}" href="{% url 'buerger/jobboerse' %}">Jobbörse</a>
+        <a class="menu_item {% if active_page == 'buerger_bewerbungen' %}selected{% endif %}" href="{% url 'buerger/bewerbungen' %}">Bewerbungen</a>
+        <a class="menu_item {% if active_page == 'buerger_postfach' %}selected{% endif %}" href="{% url 'buerger/postfach' %}">Postfach</a>
+      {% elif role == 'unternehmen' %}
+        <a class="menu_item {% if active_page == 'unternehmen_dashboard' %}selected{% endif %}" href="{% url 'unternehmen/dashboard' %}">Dashboard</a>
+        <a class="menu_item {% if active_page == 'unternehmen_bewerber' %}selected{% endif %}" href="{% url 'unternehmen/bewerber' %}">Bewerber</a>
+        <a class="menu_item {% if active_page == 'unternehmen_mitarbeiter' %}selected{% endif %}" href="{% url 'unternehmen/mitarbeiter' %}">Mitarbeiter</a>
+        <a class="menu_item {% if active_page == 'unternehmen_postfach' %}selected{% endif %}" href="{% url 'unternehmen/postfach' %}">Postfach</a>
+        <!-- <a class="menu_item" href="{% url 'unternehmen/weiterleitungKasse' %}">Kasse</a> -->
+        <a class="menu_item" href="http://[2001:7c0:2320:2:f816:3eff:fe82:34b2]:8000/bank/user/homepage?buerger_id={{unternehmen_id}}">Kasse</a>
+      {% elif role == 'bildungseinrichtungen' %}
+        <a class="menu_item {% if active_page == 'bildungseinrichtungen_dashboard' %}selected{% endif %}" href="{% url 'bildungseinrichtungen/dashboard' %}">Dashboard</a>
+        <a class="menu_item {% if active_page == 'bildungseinrichtungen_schueler' %}selected{% endif %}" href="{% url 'bildungseinrichtungen/schueler' %}">Schüler</a>
+        <a class="menu_item {% if active_page == 'bildungseinrichtungen_postfach' %}selected{% endif %}" href="{% url 'bildungseinrichtungen/postfach' %}">Postfach</a>
+      {% elif role == 'admin' %}
+        <a class="menu_item {% if active_page == 'admin_dashboard' %}selected{% endif %}" href="{% url 'admin/dashboard' %}">Dashboard</a>
+        <a class="menu_item {% if active_page == 'admin_statistiken' %}selected{% endif %}" href="{% url 'admin/statistiken' %}">Statistiken</a>
+        <a class="menu_item {% if active_page == 'admin_postfach' %}selected{% endif %}" href="{% url 'admin/postfach' %}">Postfach</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="content">
+    <div class="navbar_show_button">
+      <img src="{% static 'imgs/logo.png' %}">
+    </div>
+    <div class="topbar">
+      <h1>{% block header_title %}{% endblock %}</h1>
+      <div class="usermenu_show_button">
+        <img src="{% static 'imgs/user.png' %}">
+        <p>{{ username }}</p>
+      </div>
+      <div class="usermenu">
+        <a class="usermenu_button" href="{% url 'logout' %}?role={{ role }}" >Abmelden</a>
+      </div>
+    </div>
+    {% if messages %}
+      <div class="message_container">
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+              <div class="message danger hidden">
+                <img src="{% static 'imgs/error.png' %}" alt="Error">
+                <p>{{ message }}</p>
+              </div>
+            {% elif message.tags == 'success' %}
+              <div class="message success hidden">
+                <img src="{% static 'imgs/success.png' %}" alt="Success">
+                <p>{{ message }}</p>
+              </div>
+            {% elif message.tags == 'warning' %}
+              <div class="message warning hidden">
+                <img src="{% static 'imgs/warning.png' %}" alt="Warning">
+                <p>{{ message }}</p>
+              </div>
+            {% elif message.tags == 'info' %}
+              <div class="message info hidden">
+                <img src="{% static 'imgs/info.png' %}" alt="Info">
+                <p>{{ message }}</p>
+              </div>
+            {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

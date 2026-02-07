@@ -1,0 +1,67 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Postfach - Bürger{% endblock %}
+
+{% block header_title %}Postfach - Bürger{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/brief.png' %}">
+      <h1>Dein Postfach</h1>
+    </div>
+    <p>Dein Postfach ist der zentrale Ort für alle Nachrichten rund um deine Bewerbungen und dein Profil. Hier erhältst du Mitteilungen von Arbeitgebern, Systembenachrichtigungen und Antworten auf deine Anfragen. Jede Nachricht wird übersichtlich dargestellt, sodass du leicht den Überblick behältst. Du kannst neue Nachrichten lesen, beantworten oder archivieren, um dein Postfach ordentlich zu halten. So verpasst du keine wichtigen Informationen mehr und bleibst stets auf dem Laufenden. Das Postfach unterstützt dich dabei, die Kommunikation rund um deine beruflichen Aktivitäten einfach und effizient zu gestalten.</p>
+  </div>
+  <div class="actions">
+    <form method="post">
+      {% csrf_token %}
+        <input type="hidden" name="alle_gelesen"> 
+        <button type="submit" class="action_item">Alle als gelesen markieren</button>
+    </form>
+  </div>
+
+
+  {% for nachricht in postfach %}
+  <div class="card">
+    <div class="header">
+      <h1>{{ nachricht.sender }}</h1>
+    </div>
+    <p>{{ nachricht.beschreibung }}</p>
+
+    <div class="button_container">
+    {% if nachricht.verlinkung %}
+      <div class="button">
+        <a href="{{ nachricht.verlinkung }}">
+          {% if "jobboerse" in nachricht.verlinkung %}
+            Jobboerse
+          {% elif "bewerbungen" in nachricht.verlinkung %}
+            Bewerbungen
+          {% elif "lebenslauf" in nachricht.verlinkung %}
+            Lebenslauf
+          {% elif "dashboard" in nachricht.verlinkung %}
+            Dashboard
+           {% else %}
+            Postfach
+          {% endif %}
+        </a>
+      </div>
+      {% endif %}
+
+    {% if nachricht.status %}
+        <form method="post">
+          {% csrf_token %}
+            <input type="hidden" name="index" value="{{ forloop.counter0 }}">
+            <button type="submit" class="button success">Als gelesen markieren</button>
+        </form>
+      {% else %}
+      <div class="button disabled">
+        <p>Als gelesen markiert</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+ {% endfor %}
+{% endblock %}

@@ -1,0 +1,197 @@
+{
+  "id": "u0002",
+  "aktiv": true,
+  "name": "Katharinenhospital",
+  "adresse": "Kriegsbergstraße 60, 70174 Stuttgart",
+  "stellen": [
+    {
+      "id": "s0001",
+      "aktiv": true,
+      "bezeichnung": "Arzt",
+      "beschreibung": "Als Assistenzarzt in der Inneren Medizin übernehmen Sie die medizinische Betreuung stationärer und ambulanter Patientinnen und Patienten. Sie führen Anamnesen und körperliche Untersuchungen durch, planen Diagnostik und Therapie und dokumentieren Behandlungsverläufe. Zudem wirken Sie bei Visiten, Bereitschaftsdiensten und interdisziplinären Fallbesprechungen mit. Die Tätigkeit erfolgt unter fachärztlicher Anleitung und dient der Weiterbildung zum Facharzt.",
+      "bereiche": [
+        "Innere Medizin",
+        "Station",
+        "Ambulanz",
+        "Diagnostik"
+      ],
+      "voraussetzungen": "Abgeschlossenes Studium der Humanmedizin mit Approbation sowie Interesse an der fachärztlichen Weiterbildung.",
+      "gehalt": 5200,
+      "buerger": "8e3a914c-d999-46cf-aa8b-a36c2272b9c7",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0002",
+      "aktiv": true,
+      "bezeichnung": "Arzt",
+      "beschreibung": "In dieser Position sind Sie für die operative und perioperative Versorgung von Patientinnen und Patienten verantwortlich. Sie führen selbstständig Operationen durch, übernehmen die prä- und postoperative Betreuung und nehmen an Ruf- und Bereitschaftsdiensten teil. Darüber hinaus wirken Sie an der Ausbildung von Assistenzärztinnen und Assistenzärzten mit und beteiligen sich an interdisziplinären Fallbesprechungen.",
+      "bereiche": [
+        "Chirurgie",
+        "OP",
+        "Station",
+        "Notfallversorgung"
+      ],
+      "voraussetzungen": "Abgeschlossene Facharztweiterbildung Chirurgie sowie mehrjährige klinische Erfahrung.",
+      "gehalt": 7800,
+      "buerger": "4c3c74f9-4b33-4321-8e49-d9b1cadadf23",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0003",
+      "aktiv": true,
+      "bezeichnung": "Arzt",
+      "beschreibung": "Als Oberarzt in der Anästhesiologie übernehmen Sie die medizinische Verantwortung für Narkoseverfahren in verschiedenen operativen Fachbereichen. Sie betreuen Patientinnen und Patienten perioperativ, wirken im Schockraum und auf der Intensivstation mit und koordinieren Abläufe im OP. Zusätzlich gehören die fachliche Anleitung des ärztlichen Personals sowie die Mitwirkung an Qualitätssicherungsmaßnahmen zu Ihren Aufgaben.",
+      "bereiche": [
+        "Anästhesiologie",
+        "OP",
+        "Intensivmedizin",
+        "Notfallmedizin"
+      ],
+      "voraussetzungen": "Facharztanerkennung Anästhesiologie sowie ausgeprägte Führungs- und Organisationskompetenz.",
+      "gehalt": 9200,
+      "buerger": "3848720f-91f1-4b3c-bf71-c1d8c504dacc",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0004",
+      "aktiv": true,
+      "bezeichnung": "Arzt",
+      "beschreibung": "In dieser Position sind Sie für die operative und perioperative Versorgung von Patientinnen und Patienten verantwortlich. Sie führen selbstständig Operationen durch, übernehmen die prä- und postoperative Betreuung und nehmen an Ruf- und Bereitschaftsdiensten teil. Darüber hinaus wirken Sie an der Ausbildung von Assistenzärztinnen und Assistenzärzten mit und beteiligen sich an interdisziplinären Fallbesprechungen.",
+      "bereiche": [
+        "Chirurgie",
+        "OP",
+        "Station",
+        "Notfallversorgung"
+      ],
+      "voraussetzungen": "Abgeschlossene Facharztweiterbildung Chirurgie sowie mehrjährige klinische Erfahrung.",
+      "gehalt": 7800,
+      "buerger": "00681072-83a3-402f-90b7-5d69dd8aac3e",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0005",
+      "aktiv": true,
+      "bezeichnung": "Arzt",
+      "beschreibung": "Als Oberarzt in der Anästhesiologie übernehmen Sie die medizinische Verantwortung für Narkoseverfahren in verschiedenen operativen Fachbereichen. Sie betreuen Patientinnen und Patienten perioperativ, wirken im Schockraum und auf der Intensivstation mit und koordinieren Abläufe im OP. Zusätzlich gehören die fachliche Anleitung des ärztlichen Personals sowie die Mitwirkung an Qualitätssicherungsmaßnahmen zu Ihren Aufgaben.",
+      "bereiche": [
+        "Anästhesiologie",
+        "OP",
+        "Intensivmedizin",
+        "Notfallmedizin"
+      ],
+      "voraussetzungen": "Facharztanerkennung Anästhesiologie sowie ausgeprägte Führungs- und Organisationskompetenz.",
+      "gehalt": 9200,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerber": "8e3a914c-d999-46cf-aa8b-a36c2272b9c7",
+      "stelle": "s0001",
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "4c3c74f9-4b33-4321-8e49-d9b1cadadf23",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "3848720f-91f1-4b3c-bf71-c1d8c504dacc",
+      "stelle": "s0003",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "00681072-83a3-402f-90b7-5d69dd8aac3e",
+      "stelle": "s0004",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "85507a8b-22f1-4248-82a7-4e04650d0353",
+      "stelle": "s0005",
+      "bewerbungsdatum": "2026-01-12",
+      "rückmeldedatum": false,
+      "status": "zurückgezogen"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Hat seine Bewerbung für Arzt (s0005) zurückgezogen.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Jan Peters",
+      "beschreibung": "Neue Bewerbung für Stelle Arzt (s0005).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "00681072-83a3-402f-90b7-5d69dd8aac3e",
+      "beschreibung": "Hat das Stellenangebot für Arzt (s0004) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "00681072-83a3-402f-90b7-5d69dd8aac3e",
+      "beschreibung": "Neue Bewerbung für Stelle Arzt (s0004).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "3848720f-91f1-4b3c-bf71-c1d8c504dacc",
+      "beschreibung": "Hat das Stellenangebot für Arzt (s0003) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "3848720f-91f1-4b3c-bf71-c1d8c504dacc",
+      "beschreibung": "Neue Bewerbung für Stelle Arzt (s0003).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "4c3c74f9-4b33-4321-8e49-d9b1cadadf23",
+      "beschreibung": "Hat das Stellenangebot für Arzt (s0002) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "4c3c74f9-4b33-4321-8e49-d9b1cadadf23",
+      "beschreibung": "Neue Bewerbung für Stelle Arzt (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "8e3a914c-d999-46cf-aa8b-a36c2272b9c7",
+      "beschreibung": "Hat das Stellenangebot für Arzt (s0001) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "8e3a914c-d999-46cf-aa8b-a36c2272b9c7",
+      "beschreibung": "Neue Bewerbung für Stelle Arzt (s0001).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    }
+  ]
+}

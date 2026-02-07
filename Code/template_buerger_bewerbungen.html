@@ -1,0 +1,339 @@
+<!-- Kai Singer -->
+
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+
+{% block extra_stylesheets %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+<style>
+  .map_container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 500px;
+  }
+
+  .map {
+    flex: 1;
+    width: 100%;
+    min-height: 200px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script>
+    function resetForm(button) {
+      const form = button.closest("form");
+      if (!form) return;
+
+      const inputs = form.querySelectorAll('input:not([type="hidden"])');
+      inputs.forEach(input => {
+        input.value = "";
+      });
+
+      const selects = form.querySelectorAll("select");
+      selects.forEach(select => {
+        select.value = "all";
+      });
+    }
+  </script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+  <script>
+    function createMap(fw_id, lat, lng, name, adresse) {
+      const lat_float = parseFloat(lat);
+      const lng_float = parseFloat(lng);
+      mapboxgl.accessToken = 'pk.eyJ1IjoiN290ZW50YW56IiwiYSI6ImNtYXh1OWRuMTAyOXAycnIydTViaDI4OTQifQ.xBqrTk-WNWkprQyHVmcRmw';
+      const zuhause = [9.128289100766737, 48.78232524532078];
+
+      const map = new mapboxgl.Map({
+        container: `${ fw_id }_map`,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: zuhause,
+        zoom: 10
+      });
+
+      new mapboxgl.Marker({ color: 'red' })
+        .setLngLat(zuhause)
+        .setPopup(new mapboxgl.Popup().setHTML("<strong>Zuhause</strong>"))
+        .addTo(map);
+
+      new mapboxgl.Marker({ color: 'blue' })
+        .setLngLat([lng_float, lat_float])
+        .setPopup(new mapboxgl.Popup().setHTML(`<strong>${ name }</strong><br>${ adresse }`))
+        .addTo(map);
+    }
+  </script>
+{% endblock %}
+
+{% block page_title %}Bewerbungen - Bürger{% endblock %}
+
+{% block header_title %}Bewerbungen - Bürger{% endblock %}
+
+{% block content %}
+  {% for bewerbung in aktuelle_bewerbungen_liste %}
+    <div class="floating_bg" id="fw_bewerbung_{{ bewerbung.unternehmen_id }}_{{ bewerbung.stelle_id }}">
+      <div class="floating_window card">
+        <button class="button danger fw_close_button" onclick="closeWindow('bewerbung_{{ bewerbung.unternehmen_id }}_{{ bewerbung.stelle_id }}')">
+          <img src="{% static 'imgs/close_white.png' %}">
+        </button>
+        <div class="header">
+          <img src="{% static 'imgs/bewerbung.png' %}">
+          <h1>{{ bewerbung.bezeichnung }} ({{ bewerbung.art_str }})</h1>
+        </div>
+        <div class="card_row">
+          <div>
+            {% if bewerbung.art == "studium" or bewerbung.art == "duales_studium" %}
+              <p><span class="bold">Hochschule:</span> {{ bewerbung.unternehmen_name }}</p>
+            {% else %}
+              <p><span class="bold">Arbeitgeber:</span> {{ bewerbung.unternehmen_name }}</p>
+            {% endif %}
+            <p><span class="bold">Adresse:</span> {{ bewerbung.unternehmen_adresse }}</p>
+            <hr>
+            <p><span class="bold">Bereiche:</span> {{ bewerbung.bereiche|join:", " }}</p>
+            {% if bewerbung.art != "studium" %}
+              <p><span class="bold">Gehalt:</span> {{ bewerbung.gehalt_str }} € / Monat</p>
+            {% endif %}
+            {% if bewerbung.dauer == 0 %}
+              <p><span class="bold">Dauer:</span> Unbefristet</p>
+            {% else %}
+              <p><span class="bold">Dauer:</span> {{ bewerbung.dauer }} Monate</p>
+            {% endif %}
+            <hr>
+            <p><span class="bold">Bewerbungsdatum:</span> {{ bewerbung.bewerbungsdatum }}</p>
+            {% if bewerbung.status == "angebot" %}
+              <p><span class="bold">Rückmeldedatum:</span> {{ bewerbung.rueckmeldedatum }}</p>
+              <p><span class="bold">Status:</span> <span class="bold success">Angebot erhalten</span></p>
+            {% else %}
+              <p><span class="bold">Status:</span> <span class="bold danger">Warte auf Rückmeldung</span></p>
+            {% endif %}
+          </div>
+          <div class="map_container">
+            <div class="map" id="bewerbung_{{ bewerbung.unternehmen_id }}_{{ bewerbung.stelle_id }}_map"></div>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <p><span class="bold">Beschreibung:</span> {{ bewerbung.beschreibung }}</p>
+          <p><span class="bold">Voraussetzungen:</span> {{ bewerbung.voraussetzungen }}</p>
+        </div>
+        <div class="button_container">
+          {% if bewerbung.status == "angebot" %}
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="filter_kennwortsuche" value="{{ filter_kennwortsuche }}">
+              <input type="hidden" name="filter_rueckmeldung" value="{{ filter_rueckmeldung }}">
+              <input type="hidden" name="unternehmen_id" value="{{ bewerbung.unternehmen_id }}">
+              <input type="hidden" name="stelle_id" value="{{ bewerbung.stelle_id }}">
+              <input type="hidden" name="action" value="angebot_annehmen">
+              <button class="button success" type="submit">Angebot annehmen</button>
+            </form>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="filter_kennwortsuche" value="{{ filter_kennwortsuche }}">
+              <input type="hidden" name="filter_rueckmeldung" value="{{ filter_rueckmeldung }}">
+              <input type="hidden" name="unternehmen_id" value="{{ bewerbung.unternehmen_id }}">
+              <input type="hidden" name="stelle_id" value="{{ bewerbung.stelle_id }}">
+              <input type="hidden" name="action" value="angebot_ablehnen">
+              <button class="button danger" type="submit">Angebot ablehnen</button>
+            </form>
+          {% else %}
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="filter_kennwortsuche" value="{{ filter_kennwortsuche }}">
+              <input type="hidden" name="filter_rueckmeldung" value="{{ filter_rueckmeldung }}">
+              <input type="hidden" name="unternehmen_id" value="{{ bewerbung.unternehmen_id }}">
+              <input type="hidden" name="stelle_id" value="{{ bewerbung.stelle_id }}">
+              <input type="hidden" name="action" value="bewerbung_zurueckziehen">
+              <button class="button danger" type="submit">Bewerbung zurückziehen</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/bewerbung.png' %}">
+      <h1>Deine Bewerbungen</h1>
+    </div>
+    <p>In diesem Bereich findest du alle deine laufenden und abgeschlossenen Bewerbungen auf einen Blick. Du kannst den aktuellen Status jeder Bewerbung verfolgen – von der Einreichung bis zur Rückmeldung durch den Arbeitgeber. Außerdem hast du die Möglichkeit, neue Bewerbungen direkt zu erstellen oder bestehende Unterlagen zu überarbeiten. Damit bleibst du stets organisiert und verpasst keine wichtigen Fristen. Das System informiert dich automatisch über Änderungen oder neue Nachrichten zu deinen Bewerbungen, sodass du immer bestens vorbereitet bist, wenn es in den nächsten Schritt des Auswahlverfahrens geht.</p>
+  </div>
+  {% if aktuelle_beschaeftigung in "tot,rente,haft,kind" %}
+    <div class="card">
+      <div class="header">
+        <img src="{% static 'imgs/error.png' %}">
+        <h1>Aktuell nicht erwerbsfähig</h1>
+      </div>
+      <p>Da du aktuell nicht erwerbsfähig bist, wurden deine aktuellen Bewerbungen automatisch zurückgezogen und können nicht mehr angenommen oder abgelehnt werden.</p>
+      <p>
+        Dein aktueller Status:
+        {% if aktuelle_beschaeftigung == "tot" %}
+          <span class="bold">Tot</span>
+        {% elif aktuelle_beschaeftigung == "rente" %}
+          <span class="bold">Im Ruhestand</span>
+        {% elif aktuelle_beschaeftigung == "haft" %}
+          <span class="bold">In Haft</span>
+        {% elif aktuelle_beschaeftigung == "kind" %}
+          <span class="bold">Kind (unter {{ kind_alter }} Jahre)</span>
+        {% endif %}
+      </p>
+    </div>
+  {% elif aktuelle_beschaeftigung == "berufsverbot" %}
+    <div class="card">
+      <div class="header">
+        <img src="{% static 'imgs/warning.png' %}">
+        <h1>Berufsverbot</h1>
+      </div>
+      <p>Da du auf Grund einer Vorstrafe ein Berufsverbot hast, wurden deine aktuellen Bewerbungen bestimmter Berufe automatisch zurückgezogen und können nicht mehr angenommen oder abgelehnt werden.</p>
+      <p>Dein aktueller Status: <span class="bold">Berufsverbot</span></p>
+    </div>
+  {% endif %}
+  {% if aktuelle_beschaeftigung is None or aktuelle_beschaeftigung == "berufsverbot" %}
+    <div class="card" id="aktuelle_bewerbungen">
+      <div class="header">
+        <img src="{% static 'imgs/ablage.png' %}">
+        <h1>Aktuelle Bewerbungen</h1>
+      </div>
+      <form class="table_filter" method="post" action="{% url 'buerger/bewerbungen' %}#aktuelle_bewerbungen">
+        {% csrf_token %}
+        <div class="table_group">
+          <label for="kennwortsuche_id">Kennwortsuche</label>
+          <input type="text" placeholder="Suche..." id="kennwortsuche_id" name="filter_kennwortsuche" value="{{ filter_kennwortsuche }}">
+        </div>
+        <div class="table_group">
+          <label for="rueckmeldung_id">Rückmeldung</label>
+          <select name="filter_rueckmeldung" id="rueckmeldung_id">
+            <option value="all" {% if filter_rueckmeldung == "all" %}selected{% endif %}>Alle</option>
+            <option value="ja" {% if filter_rueckmeldung == "ja" %}selected{% endif %}>Ja</option>
+            <option value="nein" {% if filter_rueckmeldung == "nein" %}selected{% endif %}>Nein</option>
+          </select>
+        </div>
+        <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+        <button type="submit">
+          <img src="{% static 'imgs/search.png' %}">
+        </button>
+      </form>
+      <div class="table_container">
+        <table>
+          <thead>
+            <tr>
+              <th>Stellenbezeichung</th>
+              <th>Arbeitgeber / Hochschule</th>
+              <th>Bereiche</th>
+              <th>Bewerbungsdatum</th>
+              <th>Rückmeldedatum</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for bewerbung in aktuelle_bewerbungen_liste %}
+              <tr>
+                <td>{{ bewerbung.bezeichnung }}</td>
+                <td>{{ bewerbung.unternehmen_name }}</td>
+                <td>{{ bewerbung.bereiche|join:", " }}</td>
+                <td>{{ bewerbung.bewerbungsdatum }}</td>
+                {% if bewerbung.status == "angebot" %}
+                  <td>{{ bewerbung.rueckmeldedatum }}</td>
+                  <td>
+                    <div class="table_buttons">
+                      <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="filter_kennwortsuche" value="{{ filter_kennwortsuche }}">
+                        <input type="hidden" name="filter_rueckmeldung" value="{{ filter_rueckmeldung }}">
+                        <input type="hidden" name="unternehmen_id" value="{{ bewerbung.unternehmen_id }}">
+                        <input type="hidden" name="stelle_id" value="{{ bewerbung.stelle_id }}">
+                        <input type="hidden" name="action" value="angebot_annehmen">
+                        <button class="button success" type="submit">Angebot annehmen</button>
+                      </form>
+                      <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="filter_kennwortsuche" value="{{ filter_kennwortsuche }}">
+                        <input type="hidden" name="filter_rueckmeldung" value="{{ filter_rueckmeldung }}">
+                        <input type="hidden" name="unternehmen_id" value="{{ bewerbung.unternehmen_id }}">
+                        <input type="hidden" name="stelle_id" value="{{ bewerbung.stelle_id }}">
+                        <input type="hidden" name="action" value="angebot_ablehnen">
+                          <button class="button danger" type="submit">Angebot ablehnen</button>
+                      </form>
+                      <button class="button" onclick="openWindow('bewerbung_{{ bewerbung.unternehmen_id }}_{{ bewerbung.stelle_id }}'); createMap('bewerbung_{{ bewerbung.unternehmen_id }}_{{ bewerbung.stelle_id }}', '{{ bewerbung.unternehmen_coords.lat }}', '{{ bewerbung.unternehmen_coords.lng }}', '{{ bewerbung.unternehmen_name }}', '{{ bewerbung.unternehmen_adresse }}')">Details</button>
+                    </div>
+                  </td>
+                {% else %}
+                  <td><span class="bold danger">Keine Rückmeldung</span></td>
+                  <td>
+                    <div class="table_buttons">
+                      <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="filter_kennwortsuche" value="{{ filter_kennwortsuche }}">
+                        <input type="hidden" name="filter_rueckmeldung" value="{{ filter_rueckmeldung }}">
+                        <input type="hidden" name="unternehmen_id" value="{{ bewerbung.unternehmen_id }}">
+                        <input type="hidden" name="stelle_id" value="{{ bewerbung.stelle_id }}">
+                        <input type="hidden" name="action" value="bewerbung_zurueckziehen">
+                        <button class="button danger" type="submit">Bewerbung zurückziehen</button>
+                      </form>
+                      <button class="button" onclick="openWindow('bewerbung_{{ bewerbung.unternehmen_id }}_{{ bewerbung.stelle_id }}'); createMap('bewerbung_{{ bewerbung.unternehmen_id }}_{{ bewerbung.stelle_id }}', '{{ bewerbung.unternehmen_coords.lat }}', '{{ bewerbung.unternehmen_coords.lng }}', '{{ bewerbung.unternehmen_name }}', '{{ bewerbung.unternehmen_adresse }}')">Details</button>
+                    </div>
+                  </td>
+                {% endif %}
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6"><span class="italic">Die Suche ergab keine aktuellen Bewerbungen</span></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/historie.png' %}">
+      <h1>Vergangene Bewerbungen</h1>
+    </div>
+    <div class="table_container">
+      <table>
+        <thead>
+          <tr>
+            <th>Stellenbezeichung</th>
+            <th>Arbeitgeber / Hochschule</th>
+            <th>Bereiche</th>
+            <th>Bewerbungsdatum</th>
+            <th>Rückmeldedatum</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for bewerbung in vergangene_bewerbungen_liste %}
+            <tr>
+              <td>{{ bewerbung.bezeichnung }}</td>
+              <td>{{ bewerbung.unternehmen_name }}</td>
+              <td>{{ bewerbung.bereiche|join:", " }}</td>
+              <td>{{ bewerbung.bewerbungsdatum }}</td>
+              {% if bewerbung.rueckmeldedatum %}
+                <td>{{ bewerbung.rueckmeldedatum }}</td>
+              {% else %}
+                <td>Keine Rückmeldung</td>
+              {% endif %}
+              {% if bewerbung.status == "abgelehntUnternehmen" %}
+                <td><span class="danger bold">Vom Unternehmen abgelehnt</span></td>
+              {% elif bewerbung.status == "abgelehntBürger" %}
+                <td><span class="warning bold">Von dir abgelehnt</span></td>
+              {% elif bewerbung.status == "zurückgezogen" %}
+                <td><span class="warning bold">Von dir zurückgezogen</span></td>
+              {% elif bewerbung.status == "eingestellt" %}
+                <td><span class="success bold">Eingestellt</span></td>
+              {% endif %}
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="6"><span class="italic">Es wurden keine vergangenen Bewerbungen gefunden</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

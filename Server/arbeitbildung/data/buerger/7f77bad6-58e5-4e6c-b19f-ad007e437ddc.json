@@ -1,0 +1,31 @@
+{
+  "id": "7f77bad6-58e5-4e6c-b19f-ad007e437ddc",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-08",
+      "ende": false,
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0003",
+      "stelle": "s0001",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "arbeitgeber": "u0003",
+      "stelle": "s0001",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Polizeipräsidium Ludwigsburg",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Polizeipräsidium Ludwigsburg für die Stelle Polizist anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

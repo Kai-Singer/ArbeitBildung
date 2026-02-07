@@ -1,0 +1,22 @@
+{
+  "id": "aaf41910-8af3-424f-be54-5ecbb551c27e",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-10",
+      "ende": false,
+      "art": "rente",
+      "arbeitgeber": false,
+      "stelle": false,
+      "bildungseinrichtung": false,
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [],
+  "postfach": [
+    {
+      "sender": "System",
+      "beschreibung": "Sie wurden automatisch in den Ruhestand versetzt.",
+      "status": true
+    }
+  ]
+}

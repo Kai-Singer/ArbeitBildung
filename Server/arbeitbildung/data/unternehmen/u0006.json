@@ -1,0 +1,66 @@
+{
+  "id": "u0006",
+  "aktiv": true,
+  "name": "Universität Stuttgart",
+  "adresse": "Pfaffenwaldring 1, 70569 Stuttgart",
+  "stellen": [
+    {
+      "id": "s0001",
+      "aktiv": true,
+      "bezeichnung": "Informatik (B.Sc.)",
+      "beschreibung": "Das Vollzeitstudium Informatik vermittelt fundierte Kenntnisse in der Softwareentwicklung, Algorithmen und Datenstrukturen, Datenbanken sowie Rechnernetzen. Studierende erwerben analytische und praktische Fähigkeiten zur Lösung komplexer technischer Probleme und arbeiten an Projekten, die sowohl theoretische als auch praxisnahe Inhalte verbinden. Ergänzend werden mathematische Grundlagen, IT-Sicherheit und Grundlagen der Künstlichen Intelligenz behandelt.",
+      "bereiche": [
+        "Informatik",
+        "Softwareentwicklung",
+        "Algorithmen",
+        "IT-Grundlagen"
+      ],
+      "voraussetzungen": "Allgemeine Hochschulreife oder Fachhochschulreife, Interesse an Informatik und Mathematik sowie selbstständige und strukturierte Arbeitsweise.",
+      "gehalt": 0,
+      "buerger": "",
+      "besetzt": false,
+      "art": "studium",
+      "dauer": 36
+    },
+    {
+      "id": "s0002",
+      "aktiv": true,
+      "bezeichnung": "Rechtswissenschaften (LL.B.)",
+      "beschreibung": "Das Studium der Rechtswissenschaften vermittelt die wissenschaftlichen Grundlagen des deutschen Rechts und bildet die Voraussetzung für eine spätere Tätigkeit als Richterin oder Richter am Amtsgericht. Während des Studiums beschäftigst du dich intensiv mit dem Zivilrecht, Strafrecht und Öffentlichen Recht sowie den jeweiligen Verfahrensordnungen. Durch Arbeitsgemeinschaften, Fallstudien und praktische Übungen wird das theoretische Wissen vertieft. Nach dem erfolgreichen Abschluss des Studiums mit dem Ersten Staatsexamen eröffnet sich der Weg in den juristischen Vorbereitungsdienst.",
+      "bereiche": [
+        "Zivilrecht",
+        "Strafrecht",
+        "Öffentliches Recht",
+        "Verfahrensrecht",
+        "Rechtsmethodik"
+      ],
+      "voraussetzungen": "Vorausgesetzt wird die allgemeine Hochschulreife sowie ein ausgeprägtes Interesse an rechtlichen Fragestellungen. Analytisches Denkvermögen, hohe Lernbereitschaft, Sorgfalt und Verantwortungsbewusstsein sind für ein erfolgreiches Studium erforderlich.",
+      "gehalt": 0,
+      "buerger": "",
+      "besetzt": false,
+      "art": "studium",
+      "dauer": 36
+    },
+    {
+      "id": "s0003",
+      "aktiv": true,
+      "bezeichnung": "Lehramt (B.A.)",
+      "beschreibung": "Das Lehramtsstudium bereitet auf eine Tätigkeit als Lehrerin oder Lehrer an allgemeinbildenden Schulen vor. Im Studium werden fachwissenschaftliche Inhalte in zwei Unterrichtsfächern mit erziehungswissenschaftlichen und didaktischen Grundlagen kombiniert. Ergänzt wird das Studium durch schulpraktische Studien, in denen erste Unterrichtserfahrungen gesammelt werden. Ziel ist es, pädagogische, fachliche und methodische Kompetenzen zu vermitteln, um Schülerinnen und Schüler fachlich fundiert zu unterrichten und in ihrer persönlichen Entwicklung zu begleiten.",
+      "bereiche": [
+        "Erziehungswissenschaften",
+        "Fachdidaktik",
+        "Fachwissenschaften",
+        "Schulpraktische Studien",
+        "Bildungswissenschaften"
+      ],
+      "voraussetzungen": "Vorausgesetzt wird die allgemeine Hochschulreife sowie Interesse an pädagogischer Arbeit mit Kindern und Jugendlichen. Kommunikationsfähigkeit, Verantwortungsbewusstsein, Geduld und Teamfähigkeit sind für das Studium besonders wichtig.",
+      "gehalt": 0,
+      "buerger": "",
+      "besetzt": false,
+      "art": "studium",
+      "dauer": 36
+    }
+  ],
+  "bewerbungen": [],
+  "postfach": []
+}

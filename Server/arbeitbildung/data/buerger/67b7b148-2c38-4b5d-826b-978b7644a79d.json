@@ -1,0 +1,31 @@
+{
+  "id": "67b7b148-2c38-4b5d-826b-978b7644a79d",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-08",
+      "ende": false,
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0005",
+      "stelle": "s0001",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "arbeitgeber": "u0005",
+      "stelle": "s0001",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Amtsgericht Stuttgart",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Amtsgericht Stuttgart für die Stelle Richter anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

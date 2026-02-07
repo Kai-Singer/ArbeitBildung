@@ -1,0 +1,416 @@
+<!-- Leonie Waimer -->
+
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}
+<script>
+  function resetForm(button) {
+    const form = button.closest("form");
+    if (!form) return;
+
+    const inputs = form.querySelectorAll('input:not([type="hidden"])');
+    inputs.forEach(input => {
+      input.value = "";
+    });
+
+    const selects = form.querySelectorAll("select");
+    selects.forEach(select => {
+      select.value = "all";
+    });
+
+    form.submit();
+  }
+</script>
+{% endblock %}
+
+{% block page_title %}Bewerber - Unternehmen{% endblock %}
+
+{% block header_title %}Bewerber - Unternehmen{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/lebenslauf.png' %}">
+      <h1>Deine Bewerber</h1>
+    </div>
+    <p>Willkommen auf der Unternehmensseite Bewerber. Dies ist dein zentrales Steuerungsinstrument für den gesamten Rekrutierungsprozess. Der Bereich "Offene Stellen" zeigt alle aktiven Vakanzen, sortierbar nach Fachbereich, und listet die eingegangenen Bewerbungen pro Stelle. Du kannst neue Stellen direkt erstellen und bestehende verwalten. Der Abschnitt "Aktuelle Bewerber" ermöglicht die schnelle Bearbeitung eingehender Kandidaturen. Hier kannst du Bewerbungen einsehen, direkt Annehmen oder Ablehnen und den aktuellen Status verfolgen. Zusätzlich bietet die Seite eine Historie abgeschlossener Verfahren, um den Erfolg deiner Personalsuche transparent zu dokumentieren. Das Portal garantiert einen effizienten, strukturierten und transparenten Bewerberprozess.</p>
+  </div>
+  <div class="actions">
+    <form method="post">
+      {% csrf_token %}
+        <input type="hidden" name="neue_stelle"> 
+        <button type = "button" class="action_item" onclick="openWindow('neue_stelle')">Neue Stelle erstellen</button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/ablage.png' %}">
+      <h1>Offene Stellen</h1>
+    </div>
+    <form class="table_filter" method="post" action="{% url 'unternehmen/bewerber' %}#offeneStellen">
+      {% csrf_token %}
+      <div class="table_group">
+        <label for="bewerber_offeneStellen_id">Kennwortsuche</label>
+        <input type="text" placeholder="Suche..." id="bewerber_offeneStellen_id" name="filter_offeneStellen_kennwortsuche" value="{{ filter_offeneStellen_kennwortsuche }}">
+      </div>
+      <div class="table_group">
+        <label for="offeneStellen_bereich_id">Bereich</label>
+        <select name="filter_offeneStellen_bereich" id="offeneStellen_bereich_id">
+          <option value="all" {% if filter_offeneStellen_bereich == 'all' %}selected{% endif %}>Alle</option>
+          {% for bereich in offeneStellen_bereiche_filter_liste %}
+           <option value="{{ bereich|lower }}" {% if filter_offeneStellen_bereich|lower == bereich|lower %}selected{% endif %}>{{ bereich }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="table_group">
+        <label for="offeneStellen_status_id">Status</label>
+        <select name="filter_offeneStellen_status" id="offeneStellen_status_id">
+          <option value="all" {% if filter_offeneStellen_status == 'all' %}selected{% endif %}>Alle</option>
+          {% for status in offeneStellen_status_filter_liste %}
+           <option value="{{ status|lower }}" {% if filter_offeneStellen_status|lower == status|lower %}selected{% endif %}>{{ status }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+      <input type="hidden" name="filter_bewerber_kennwortsuche" value="{{ filter_bewerber_kennwortsuche }}">
+      <div class="button_container">
+        <button type="submit">
+          <img src="{% static 'imgs/search.png' %}">
+        </button>
+      </div>
+    </form>
+    <div class="table_container">
+      <table>
+        <thead>
+          <tr>
+            <th>Bezeichnung</th>
+            <th>Bereich</th>
+            <th>Voraussetzungen</th>
+            <th>Gehalt</th>
+            <th>Bewerbungen</th>
+            <th>Anstellungsart</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+         <tbody>
+          {% for stelle in offeneStellen %}
+          <tr>
+            <td>{{ stelle.bezeichnung }}</td>
+            <td>{{ stelle.bereiche|join:", " }}</td>
+            <td>{{ stelle.voraussetzungen }}</td>
+            <td>
+              {% if stelle.gehalt %}
+                {{ stelle.gehalt }} € / Monat
+              {% else %}
+                - 
+              {% endif %}
+            </td>
+            <td>{{ stelle.anzahlBewerbungen }}</td>
+            <td> <!-- Kai: "duales_studium" in "Duales Studium" umwandeln, sonstige: groß schreiben -->
+              {% if stelle.art == "duales_studium" %}
+                Duales Studium
+              {% else %}
+                {{ stelle.art|title }}
+              {% endif %}
+            </td>
+            <td class="table_buttons">
+              <button class="button" onclick="openWindow('stelle_{{ stelle.id }}')">Bearbeiten</button>
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="stelleID" value="{{ stelle.id }}">
+                {% if stelle.aktiv %}
+                  <button class="button danger" name="aktion" value="deaktivieren">Deaktivieren</button>
+                {% else %}
+                  <button class="button success" name="aktion" value="aktivieren">Aktivieren</button>
+                {% endif %}
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6">Keine offenen Stellen vorhanden</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/menschen.png' %}">
+      <h1>Aktuelle Bewerber</h1>
+    </div>
+    <form class="table_filter" method="post" action="{% url 'unternehmen/bewerber' %}#bewerber">
+      {% csrf_token %}
+      <div class="table_group">
+        <label for="bewerber_kennwortsuche_id">Kennwortsuche</label>
+        <input type="text" placeholder="Suche..." id="bewerber_kennwortsuche_id" name="filter_bewerber_kennwortsuche" value="{{ filter_bewerber_kennwortsuche }}">
+      </div>
+      <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+      <input type="hidden" name="filter_offeneStellen_kennwortsuche" value="{{ filter_offeneStellen_kennwortsuche }}">
+      <input type="hidden" name="filter_offeneStellen_bereich" value="{{ filter_offeneStellen_bereich }}">
+      <input type="hidden" name="filter_offeneStellen_status" value="{{ filter_offeneStellen_status }}">
+      <button type="submit">
+        <img src="{% static 'imgs/search.png' %}">
+      </button>
+    </form>
+    <div class="table_container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Stellenbezeichnung</th>
+            <th>Bewerbungsdatum</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for bewerbung in aktuelleBewerber %}
+          <tr>
+            <td>{{ bewerbung.bewerberName }}</td>
+            <td>{{ bewerbung.stellenbezeichnung }}</td>
+            <td>{{ bewerbung.bewerbungsdatum }}</td>
+            <td>
+              <form method="post">
+                {% csrf_token %}
+                <div class="table_buttons">
+                <input type="hidden" name="bewerberID" value="{{ bewerbung.bewerber }}">
+                <input type="hidden" name="bewerbungsStelleID" value="{{ bewerbung.stelle }}">
+                {% if bewerbung.status == 'offen' %}
+                  <button class="button success" name="aktionBewerbung" value="bewerbungAnnehmen">Bewerbung annehmen</button>
+                  <button class="button danger" name="aktionBewerbung" value="bewerbungAblehnen">Bewerbung ablehnen</button>
+              </form>
+                <button type="button" class="button" onclick="openWindow('bewerbung_{{ forloop.counter0 }}')">Details</button>
+                {% elif bewerbung.status == 'angebot' %}
+                <button class="button disabled">Warte auf Rückmeldung</button>
+                <button type="button" class="button" onclick="openWindow('bewerbung_{{ forloop.counter0 }}')">Details</button>
+                {% endif %}
+                </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4">Keine aktuellen Bewerbungen vorhanden</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/historie.png' %}">
+      <h1>Vergangene Bewerbungen</h1>
+    </div>
+    <div class="table_container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Stellenbezeichnung</th>
+            <th>Bewerbungsdatum</th>
+            <th>Rückmeldedatum</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for bewerbung in vergangeneBewerber %}
+          <tr>
+            <td>{{ bewerbung.bewerberName }}</td>
+            <td>{{ bewerbung.stellenbezeichnung}}</td>
+            <td>{{ bewerbung.bewerbungsdatum }}</td>
+            <td>
+              {% if bewerbung.rückmeldedatum %}
+                {{ bewerbung.rückmeldedatum }}
+              {% else %}
+                - 
+              {% endif %}
+              </td>
+            <td>
+              {% if bewerbung.status == 'zurückgezogen' %}
+                <span class="danger bold">Vom Bewerber zurückgezogen</span>
+              {% elif bewerbung.status == 'abgelehntUnternehmen' %}
+                <span class="warning bold">Von dir abgelehnt</span>
+              {% elif bewerbung.status == 'abgelehntBürger' %}
+                <span class="danger bold">Vom Bewerber abgelehnt</span>
+              {% elif bewerbung.status == 'eingestellt' %}
+                <span class="success bold">Eingestellt</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5">Keine vergangenen Bewerbungen vorhanden</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!-- Floating Window für neue Stelle -->
+<div class="floating_bg" id="fw_neue_stelle">
+  <div class="floating_window card">
+    <button class="button danger fw_close_button" onclick="closeWindow('neue_stelle')">
+      <img src="{% static 'imgs/close_white.png' %}">
+    </button>
+    <div class="header">
+      <img src="{% static 'imgs/neue_arbeit.png' %}">
+      <h1>Neue Stelle erstellen</h1>
+    </div>
+    <form method="post" class="fw_form table_filter no_mb">
+      {% csrf_token %}
+      <input type="hidden" name="aktionNeueStelle" value="neueStelleErstellen">
+      <div class="table_group">
+        <label>Bezeichnung</label>
+        <input type="text" name="bezeichnung" required>
+      </div>
+      <div class="table_group">
+        <label>Beschreibung</label>
+        <textarea name="beschreibung" rows="3"></textarea>
+      </div>
+      <div class="table_group">
+        <label>Bereiche</label>
+        <textarea name="bereiche" rows="2" placeholder="Kommagetrennt"></textarea>
+      </div>
+      <div class="table_group">
+        <label>Voraussetzungen</label>
+        <textarea name="voraussetzungen" rows="2"></textarea>    
+      </div>
+      <div class="table_group">    
+        <label>Gehalt in € pro Monat</label>
+        <input type="number" name="gehalt" step="1">
+      </div>
+      <div class="table_group">
+        <label>Anstellungsart</label>
+        <select name="anstellungsart" id="anstellungsart_neu">
+          <option value="anstellung">Anstellung</option>
+          <option value="studium">Studium</option>
+          <option value="duales_studium">Duales Studium</option>
+          <option value="ausbildung">Ausbildung</option>
+        </select>
+      </div>
+      <div class="table_group">
+        <div id="dauer-feld-neu" style="display:none;">
+          <label>Dauer (Monate)</label>
+          <input type="number" name="dauer" step="1">
+        </div>
+      </div>
+      <button class="button success" type="submit" name="aktionNeueStelle" value="neueStelleErstellen">Erstellen</button>
+    </form>
+  </div>
+</div>
+
+<!--Floating Window um Stelle zu bearbeiten-->
+{% for stelle in offeneStellen %}
+<div class="floating_bg" id="fw_stelle_{{ stelle.id }}">
+  <div class="floating_window card">
+    <button class="button danger fw_close_button" onclick="closeWindow('stelle_{{ stelle.id }}')">
+      <img src="{% static 'imgs/close_white.png' %}">
+    </button>
+    <div class="header">
+      <img src="{% static 'imgs/bearbeiten.png' %}">
+      <h1>Stelle bearbeiten – {{ stelle.bezeichnung }}</h1>
+    </div>
+    <form method="post" class="fw_form table_filter no_mb">
+      {% csrf_token %}
+      <input type="hidden" name="offeneStellenID" value="{{ stelle.id }}">
+      <div class="table_group">
+        <label>Bezeichnung</label>
+        <input type="text" name="bezeichnung" value="{{ stelle.bezeichnung }}">
+      </div>
+      <div class="table_group">
+        <label>Bereiche</label>
+        <textarea name="bereiche" rows="2">{{ stelle.bereiche|join:", " }}</textarea>
+      </div>
+      <div class="table_group">
+        <label>Voraussetzungen</label>
+        <textarea name="voraussetzungen" rows="2">{{ stelle.voraussetzungen }}</textarea>
+      </div>
+      <div class="table_group">
+        <label>Beschreibung</label>
+        <textarea name="beschreibung" rows="4">{{ stelle.beschreibung }}</textarea>
+      </div>
+      <div class="table_group">
+        <label>Gehalt in € pro Monat</label>
+        <input type="number" name="gehalt" step="1" value="{{ stelle.gehalt }}">
+      </div>
+      <div class="table_group">
+        <label>Anstellungsart</label>
+        <select name="anstellungsart" id="anstellungsart">
+          <option value="anstellung" {% if stelle.art == 'anstellung' %}selected{% endif %}>Anstellung</option>
+          <option value="studium" {% if stelle.art == 'studium' %}selected{% endif %}>Studium</option>
+          <option value="duales_studium" {% if stelle.art == 'duales_studium' %}selected{% endif %}>Duales Studium</option>
+          <option value="ausbildung" {% if stelle.art == 'ausbildung' %}selected{% endif %}>Ausbildung</option>
+        </select>
+      </div>
+      <div class="table_group">
+        <label>Dauer (Monate)</label>
+        <input type="number" name="dauer" step="1" value="{{ stelle.dauer }}">
+      </div>
+      <div class="button_container">
+        <button class="button success" name="aktionStelleBearbeiten" value="stelleBearbeiten">Speichern</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endfor %}
+
+<!--Floating Window um Bewerberdetails zu sehen-->
+{% for bewerbung in aktuelleBewerber %}
+<div class="floating_bg" id="fw_bewerbung_{{ forloop.counter0 }}">
+  <div class="floating_window card">
+    <button class="button danger fw_close_button" onclick="closeWindow('bewerbung_{{ forloop.counter0 }}')">
+      <img src="{% static 'imgs/close_white.png' %}">
+    </button>
+    <div class="header">
+      <img src="{% static 'imgs/ausweis.png' %}">
+      <h1>Bewerberdetails</h1>
+    </div>
+    <div class="table_group">
+      <label>Name: {{ bewerbung.bewerberName }}</label>
+      <label>Stellenbezeichnung: {{ bewerbung.stellenbezeichnung }}</label>
+      <label>Adresse: {{ bewerbung.bewerberAdresse }}</label>
+      <label>Geburtsdatum: {{ bewerbung.bewerberGeburtsdatum }}</label>
+    </div>
+    <h2>Lebenslauf</h2>
+    {% for eintrag in bewerbung.lebenslauf %}
+      <div class="card">
+        <div class="header">
+          <h1>
+          {% if eintrag.arbeitgeber %}
+            Anstellung
+          {% else %}
+            Schule
+          {% endif %}
+          </h1>
+        </div>
+        <p>
+          <span class="bold">Zeitraum:</span>
+          {{ eintrag.beginn }} –
+          {% if eintrag.ende %}
+            {{ eintrag.ende }}
+          {% else %}
+            heute
+          {% endif %}
+        </p>
+        {% if eintrag.arbeitgeber %}
+          <p><span class="bold">Arbeitgeber:</span> {{ eintrag.arbeitgeber }}</p>
+          <p><span class="bold">Stelle:</span> {{ eintrag.stelle }}</p>
+        {% endif %}
+        {% if eintrag.bildungseinrichtung %}
+          <p><span class="bold">Bildungseinrichtung:</span> {{ eintrag.bildungseinrichtung }}</p>
+          <p><span class="bold">Abschluss:</span> {{ eintrag.abschluss }}</p>
+        {% endif %}
+        {% if eintrag.zeugnis.beschreibung %}
+          <p><span class="bold">Zeugnis:</span> {{ eintrag.zeugnis.beschreibung }}</p>
+        {% endif %}
+        {% if eintrag.zeugnis.note %}
+          <p><span class="bold">Note:</span> {{ eintrag.zeugnis.note }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

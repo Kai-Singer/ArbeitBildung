@@ -1,0 +1,11 @@
+{
+  "id": "b0003",
+  "aktiv": true,
+  "name": "Staufer-Gymnasium",
+  "schulart": "Gymnasium",
+  "adresse": "Mayenner Straße 30, 71332 Waiblingen",
+  "plaetze_gesamt": 40,
+  "dauer": "8",
+  "schueler": [],
+  "postfach": []
+}

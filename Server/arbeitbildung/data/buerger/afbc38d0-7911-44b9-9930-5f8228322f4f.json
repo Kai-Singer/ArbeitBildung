@@ -1,0 +1,25 @@
+{
+  "id": "afbc38d0-7911-44b9-9930-5f8228322f4f",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-14",
+      "ende": "2026-01-14",
+      "art": "schueler",
+      "bildungseinrichtung": "b0002",
+      "arbeitgeber": false,
+      "stelle": false,
+      "zeugnis": {
+        "beschreibung": "Sehr gut",
+        "abschlussnote": "1"
+      }
+    }
+  ],
+  "bewerbungen": [],
+  "postfach": [
+    {
+      "sender": "Admin",
+      "beschreibung": "Bitte stelle deine Frage",
+      "status": true
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "e73fae0f-44cf-4e5a-9090-cf20651a4d99",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-14",
+      "ende": "2026-01-14",
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0001",
+      "stelle": "s0002",
+      "zeugnis": {}
+    },
+    {
+      "beginn": "2026-01-14",
+      "ende": false,
+      "art": "arbeitslos",
+      "bildungseinrichtung": false,
+      "arbeitgeber": false,
+      "stelle": false,
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-14",
+      "rückmeldedatum": "2026-01-14",
+      "arbeitgeber": "u0001",
+      "stelle": "s0002",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "System",
+      "beschreibung": "Du wurdest als arbeitslos gemeldet. Lebenslauf und Register wurden aktualisiert.",
+      "status": true
+    },
+    {
+      "sender": "Stadtverwaltung Waiblingen",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Stadtverwaltung Waiblingen für die Stelle Beamter angenommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

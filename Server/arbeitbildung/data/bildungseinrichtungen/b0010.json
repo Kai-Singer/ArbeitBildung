@@ -1,0 +1,11 @@
+{
+    "id": "b0010",
+    "aktiv": true,
+    "name": "Linden-Realschule",
+    "schulart": "Realschule",
+    "adresse": "Lindenschulstraße 20, 70327 Stuttgart",
+    "plaetze_gesamt": "30",
+    "dauer": "6",
+    "schueler": [],
+    "postfach": []
+}

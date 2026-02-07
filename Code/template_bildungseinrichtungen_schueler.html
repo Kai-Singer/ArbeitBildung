@@ -1,0 +1,140 @@
+<!-- Sophie Schumann -->
+
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}
+<script src="{% static 'js/floating_window_script.js' %}"></script>
+<!--Zurücksetzen button--> 
+<script>
+  function resetForm(button) {
+    const form = button.closest("form");
+    if (!form) return;
+
+    const inputs = form.querySelectorAll('input:not([type="hidden"])');
+    inputs.forEach(input => {
+      input.value = "";
+    });
+
+    const selects = form.querySelectorAll("select");
+    selects.forEach(select => {
+      select.value = "all";
+    });
+
+    form.submit();
+  }
+</script>
+ 
+{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Schüler - Bildungseinrichtung{% endblock %}
+
+{% block header_title %}Schüler - Bildungseinrichtung{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/schueler.png' %}">
+      <h1>Deine Schüler</h1>
+    </div>
+    <p>Willkommen auf der Seite Schüler. Als zentrale Verwaltungsstelle behältst du hier den vollständigen Überblick über alle aktuellen Schüler deiner Bildungseinrichtung. Mithilfe der Kennwortsuche findest du schnell einzelne Schüler. Die Tabelle "Aktuelle Schüler" liefert dir wesentliche Informationen, wie den Namen, das Einschulungsdatum und den voraussichtlichen Abschlusstermin. Über die Aktionsspalte hast du direkten Zugriff auf wichtige Prozesse. Mit einem Klick kannst du das Zeugnis bearbeiten und so die administrativen Aufgaben rund um die Schullaufbahn einfach und effizient erledigen. Dies ist dein zentrales Werkzeug für das gesamte Schüler-Management.</p>
+  </div>
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/menschen.png' %}">
+      <h1>Aktuelle Schüler</h1>
+    </div>
+    <form class="table_filter" method="get">
+      <div class="table_group">
+        <label for="search">Kennwortsuche nach Name </label>
+        <input type="text" placeholder="Suche..." id="search" name="search" value="{{ suchbegriff }}">
+      </div>
+      <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+      <button type="submit">
+        <img src="{% static 'imgs/search.png' %}">
+      </button>
+    </form>
+    <div class="table_container">
+      <table>
+        <thead>
+          <tr>
+            <th>Buerger ID</th>
+            <th>Name</th>
+            <th>Einschulung</th>
+            <th>Voraussichtlicher Abschluss</th>
+            <th>Aktuelle Note</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+           {% for schueler in schueler %}
+      <tr>
+        <td>{{ schueler.id }}</td>
+        <td>{{ schueler.name }}</td>
+        <td>{{ schueler.einschulung }}</td>
+        <td>{{ schueler.voraussichtlicher_abschluss }}</td>
+        <td>{{ schueler.aktuelle_note }}</td>
+        <td class="table_buttons">
+          <button class="button" onclick="openWindow('edit_zeugnis_{{ schueler.id }}')">Zeugnis bearbeiten</button>
+            
+          <!-- Kündigen Button -->
+          <form method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="schueler_kuendigen">
+            <input type="hidden" name="schueler_id" value="{{ schueler.id }}">
+            <button type="submit" class="button danger" onclick="return confirm('Möchtest du diesen Schüler wirklich kündigen?');">
+              Schüler kündigen
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+
+      <tr>
+        <td colspan="6">Keine Schüler vorhanden.</td>
+      </tr>
+      {% endfor %}       	
+	</tbody>
+      </table>
+    </div>
+  </div>
+
+<!-- Floating Window -->
+{% for sch in schueler%}
+<div class="floating_bg" id="fw_edit_zeugnis_{{ sch.id }}">
+  <div class="floating_window card">
+
+    <button class="button danger fw_close_button"
+            onclick="closeWindow('edit_zeugnis_{{ sch.id }}')">
+      <img src="{% static 'imgs/close_white.png' %}">
+    </button>
+
+    </button> <div class="header"> 
+      <img src="{% static 'imgs/zeugnis.png' %}"> 
+      <h1>Zeugnis bearbeiten von {{ sch.name }}</h1> 
+    </div> 
+
+    <p><span class="bold">Schüler-ID:</span><br>{{ sch.id }}</p><br>
+
+    <form method="post" class="fw_form table_filter no_mb">
+      {% csrf_token %}
+      <input type="hidden" name="schueler_id" value="{{ sch.id }}">
+     
+      <div class="table_group">
+        <label>Beschreibung:</label>
+        <input type="text" name="beschreibung" value="{{ sch.aktuelle_beschreibung|default:'' }}">
+      </div>
+      <div class="table_group">
+        <label>Abschlussnote:</label>
+        <input type="text" name="note" value="{{ sch.aktuelle_note|default:'' }}">
+      </div>
+      <button type="submit" class="button success">Speichern</button>
+    </form>
+
+
+  </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

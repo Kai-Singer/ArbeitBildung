@@ -1,0 +1,23 @@
+{
+  "id": "b0002",
+  "aktiv": true,
+  "name": "Albertus-Magnus-Gymnasium",
+  "schulart": "Gymnasium",
+  "adresse": "In den Ringelgärten 90, 70374 Stuttgart",
+  "plaetze_gesamt": 60,
+  "dauer": "8",
+  "schueler": [],
+  "postfach": [
+    {
+      "sender": "Felix Klein",
+      "beschreibung": "Hat das Verhältnis für Bildungseinrichtung b0002 beendet. Schüler wurde abgemeldet.",
+      "status": true
+    },
+    {
+      "sender": "System",
+      "beschreibung": "Neuer Schüler: Felix Klein",
+      "verlinkung": "/bildungseinrichtungen/schueler",
+      "status": true
+    }
+  ]
+}

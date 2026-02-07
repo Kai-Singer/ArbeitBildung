@@ -1,0 +1,31 @@
+{
+  "id": "00681072-83a3-402f-90b7-5d69dd8aac3e",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-10",
+      "ende": false,
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0002",
+      "stelle": "s0004",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "arbeitgeber": "u0002",
+      "stelle": "s0004",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Katharinenhospital",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Katharinenhospital für die Stelle Arzt anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

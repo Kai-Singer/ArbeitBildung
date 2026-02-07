@@ -1,0 +1,67 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Dashboard - Bildungseinrichtung{% endblock %}
+
+{% block header_title %}Willkommen zurück, {{ username }}! - Bildungseinrichtung{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/dashboard.png' %}">
+      <h1>Dein Dashboard</h1>
+    </div>
+    <p>Willkommen im Dashboard deines Bildungsportals! Dieser zentrale Startpunkt liefert dir als Lehrende oder Verwaltungsperson sofort alle wesentlichen Informationen deiner Einrichtung. Auf einen Blick siehst du die zugeordnete Schulart (z.B. Gymnasium), die Anzahl der aktuellen Schüler sowie alle ungelesenen Nachrichten. Das Dashboard dient als schnelles Cockpit für die Schulverwaltung. Über die direkten Aktionen gelangst du umgehend zur Schülerverwaltung und zu deinem Postfach. Bei Fragen steht dir der direkte Kontakt zum Support-Team über das integrierte Formular zur Verfügung. Nutze das Dashboard, um deine administrativen Aufgaben effizient zu steuern und organisiert zu bleiben.</p>
+  </div>
+  <div class="dashboard">
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Schulart</h1>
+      </div>
+      <p><span class="bold">{{ schulart }}</span></p>
+    </div>
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Aktuelle Schüler</h1>
+      </div>
+      <p><span class="bold">{{ anzahl_schueler }}</span> Schüler</p>
+    </div>
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Ungelesene Nachrichten</h1>
+      </div>
+      <p><span class="bold">{{ anzahl_ungelesene_nachrichten }}</span> Nachricht</p>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="action_item" href="{% url 'bildungseinrichtungen/schueler' %}">
+      <img src="{% static 'imgs/schueler.png' %}">
+      <p>Schüler</p>
+    </a>
+    <a class="action_item" href="{% url 'bildungseinrichtungen/postfach' %}">
+      <img src="{% static 'imgs/brief.png' %}">
+      <p>Postfach</p>
+    </a>
+  </div>
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/support.png' %}">
+      <h1>Kontakt und Support</h1>
+    </div>
+    <p>Wenn du Fragen hast oder technische Unterstützung benötigst, kannst du dich jederzeit an unser Support-Team wenden. Wir helfen dir gerne weiter und melden uns so schnell wie möglich zurück.</p>
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="table_filter no_mb mt">
+        <div class="table_group">
+          <label for="betrag">Nachricht</label>
+          <textarea id="nachricht" name="nachricht" placeholder="Deine Nachricht" required></textarea>
+        </div>
+        <button type="submit" class="button success">
+          <p>Abschicken</p>
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

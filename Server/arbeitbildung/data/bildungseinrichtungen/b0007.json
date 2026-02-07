@@ -1,0 +1,11 @@
+{
+  "id": "b0007",
+  "aktiv": true,
+  "name": "Lindenschule Hohenacker",
+  "schulart": "Grundschule",
+  "adresse": "Rechbergstraße 27, 71336 Waiblingen",
+  "plaetze_gesamt": "20",
+  "dauer": "4",
+  "schueler": [],
+  "postfach": []
+}

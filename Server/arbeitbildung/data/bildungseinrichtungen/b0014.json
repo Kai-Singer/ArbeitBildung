@@ -1,0 +1,11 @@
+{
+    "id": "b0014",
+    "aktiv": true,
+    "name": "Schwabschule",
+    "schulart": "Grundschule",
+    "adresse": "Bebelstraße 17, 70176 Stuttgart",
+    "plaetze_gesamt": "20",
+    "dauer": "4",
+    "schueler": [],
+    "postfach": []
+}

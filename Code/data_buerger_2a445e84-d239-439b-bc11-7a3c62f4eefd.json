@@ -1,0 +1,33 @@
+# In diese Dateien hat JEDER Dinge über den Python-Code hinzugefügt. Es kann nicht differenziert werden.
+
+{
+  "id": "2a445e84-d239-439b-bc11-7a3c62f4eefd",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-08",
+      "ende": false,
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0001",
+      "stelle": "s0001",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "arbeitgeber": "u0001",
+      "stelle": "s0001",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Stadtverwaltung Waiblingen",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Stadtverwaltung Waiblingen für die Stelle Beamter anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

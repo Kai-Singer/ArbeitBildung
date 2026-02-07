@@ -1,0 +1,171 @@
+{
+  "id": "u0004",
+  "aktiv": true,
+  "name": "Landtag von Baden-Württemberg",
+  "adresse": "Konrad-Adenauer-Straße 3, 70173 Stuttgart",
+  "stellen": [
+    {
+      "id": "s0001",
+      "aktiv": true,
+      "bezeichnung": "Legislative",
+      "beschreibung": "Als Landtagsabgeordnete/r vertreten Sie die Interessen Ihres Wahlkreises im Landtag von Baden-Württemberg. Sie nehmen an Plenarsitzungen, Ausschüssen und Fraktionssitzungen teil und wirken an der Gesetzgebung sowie an parlamentarischen Entscheidungen mit. Ein weiterer Schwerpunkt liegt in der Betreuung von Bürgeranliegen, der Teilnahme an öffentlichen Veranstaltungen sowie der kontinuierlichen Kommunikation mit Verbänden, Kommunen und Institutionen im Wahlkreis.",
+      "bereiche": [
+        "Parlament",
+        "Wahlkreisarbeit",
+        "Gesetzgebung",
+        "Bürgerkontakt"
+      ],
+      "voraussetzungen": "Deutsche Staatsangehörigkeit, Mindestalter 18 Jahre, erfolgreiche Wahl in den Landtag sowie politisches Engagement und Kommunikationsfähigkeit.",
+      "gehalt": 8500,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0002",
+      "aktiv": true,
+      "bezeichnung": "Legislative",
+      "beschreibung": "In dieser Funktion übernehmen Sie innerhalb Ihrer Fraktion die fachpolitische Verantwortung für ein bestimmtes Themengebiet, z. B. Inneres, Bildung oder Finanzen. Sie erarbeiten Stellungnahmen, bringen Gesetzesinitiativen ein und vertreten die Positionen Ihrer Fraktion in Ausschüssen und öffentlichen Debatten. Zudem arbeiten Sie eng mit Ministerien, Fachverbänden und wissenschaftlichen Einrichtungen zusammen.",
+      "bereiche": [
+        "Fachpolitik",
+        "Ausschussarbeit",
+        "Gesetzesinitiativen",
+        "Fraktion"
+      ],
+      "voraussetzungen": "Mandat im Landtag von Baden-Württemberg, vertiefte Fachkenntnisse im jeweiligen Politikfeld sowie analytisches Denkvermögen.",
+      "gehalt": 8500,
+      "buerger": "32f03c03-0af2-4ae8-8b6b-f94246b1d2f2",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0003",
+      "aktiv": true,
+      "bezeichnung": "Legislative",
+      "beschreibung": "Als Parlamentarische/r Geschäftsführer/in koordinieren Sie die parlamentarische Arbeit Ihrer Fraktion. Sie planen Abläufe im Plenum, stimmen Tagesordnungen ab und sorgen für die organisatorische und strategische Umsetzung politischer Ziele. Darüber hinaus fungieren Sie als Schnittstelle zwischen Fraktion, Präsidium und anderen parlamentarischen Gremien und tragen maßgeblich zur Arbeitsfähigkeit der Fraktion bei.",
+      "bereiche": [
+        "Parlamentsorganisation",
+        "Fraktionsarbeit",
+        "Koordination",
+        "Strategie"
+      ],
+      "voraussetzungen": "Mitglied des Landtags von Baden-Württemberg, ausgeprägte Organisations- und Führungsfähigkeit sowie hohe politische Erfahrung.",
+      "gehalt": 9000,
+      "buerger": "37174cfc-5603-4c2f-88b2-f5f8b1ef51fd",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0004",
+      "aktiv": true,
+      "bezeichnung": "Legislative",
+      "beschreibung": "In dieser Funktion übernehmen Sie innerhalb Ihrer Fraktion die fachpolitische Verantwortung für ein bestimmtes Themengebiet, z. B. Inneres, Bildung oder Finanzen. Sie erarbeiten Stellungnahmen, bringen Gesetzesinitiativen ein und vertreten die Positionen Ihrer Fraktion in Ausschüssen und öffentlichen Debatten. Zudem arbeiten Sie eng mit Ministerien, Fachverbänden und wissenschaftlichen Einrichtungen zusammen.",
+      "bereiche": [
+        "Fachpolitik",
+        "Ausschussarbeit",
+        "Gesetzesinitiativen",
+        "Fraktion"
+      ],
+      "voraussetzungen": "Mandat im Landtag von Baden-Württemberg, vertiefte Fachkenntnisse im jeweiligen Politikfeld sowie analytisches Denkvermögen.",
+      "gehalt": 8500,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0005",
+      "aktiv": true,
+      "bezeichnung": "Legislative",
+      "beschreibung": "Als Parlamentarische/r Geschäftsführer/in koordinieren Sie die parlamentarische Arbeit Ihrer Fraktion. Sie planen Abläufe im Plenum, stimmen Tagesordnungen ab und sorgen für die organisatorische und strategische Umsetzung politischer Ziele. Darüber hinaus fungieren Sie als Schnittstelle zwischen Fraktion, Präsidium und anderen parlamentarischen Gremien und tragen maßgeblich zur Arbeitsfähigkeit der Fraktion bei.",
+      "bereiche": [
+        "Parlamentsorganisation",
+        "Fraktionsarbeit",
+        "Koordination",
+        "Strategie"
+      ],
+      "voraussetzungen": "Mitglied des Landtags von Baden-Württemberg, ausgeprägte Organisations- und Führungsfähigkeit sowie hohe politische Erfahrung.",
+      "gehalt": 9000,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerber": "a029e720-d429-4799-8fd4-076ae053bfd6",
+      "stelle": "s0001",
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "32f03c03-0af2-4ae8-8b6b-f94246b1d2f2",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "37174cfc-5603-4c2f-88b2-f5f8b1ef51fd",
+      "stelle": "s0003",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Sarah Weber",
+      "beschreibung": "Der Bürger hat ein Berufsverbot für den Beruf bekommen, den er aktuell besitzt. Die Stelle \"Legislative\" wurde wieder freigegeben.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "Sarah Weber",
+      "beschreibung": "Der Bürger hat ein Berufsverbot für den Beruf, für den er sich beworben hat. Die Bewerbung für die Stelle \"Legislative\" wurde zurückgezogen.",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "37174cfc-5603-4c2f-88b2-f5f8b1ef51fd",
+      "beschreibung": "Hat das Stellenangebot für Legislative (s0003) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "37174cfc-5603-4c2f-88b2-f5f8b1ef51fd",
+      "beschreibung": "Neue Bewerbung für Stelle Legislative (s0003).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "32f03c03-0af2-4ae8-8b6b-f94246b1d2f2",
+      "beschreibung": "Hat das Stellenangebot für Legislative (s0002) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "32f03c03-0af2-4ae8-8b6b-f94246b1d2f2",
+      "beschreibung": "Neue Bewerbung für Stelle Legislative (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "a029e720-d429-4799-8fd4-076ae053bfd6",
+      "beschreibung": "Hat das Stellenangebot für Legislative (s0001) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "a029e720-d429-4799-8fd4-076ae053bfd6",
+      "beschreibung": "Neue Bewerbung für Stelle Legislative (s0001).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    }
+  ]
+}

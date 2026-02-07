@@ -1,0 +1,412 @@
+<!-- Sophie Schumann -->
+
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+
+{% block extra_stylesheets %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+<link href="{% static 'css/mapbox.css' %}?v=2" rel="stylesheet">
+<style>
+  #map {
+    width: 100%;
+    height: 500px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/floating_window_script.js' %}"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiN290ZW50YW56IiwiYSI6ImNtYXh1OWRuMTAyOXAycnIydTViaDI4OTQifQ.xBqrTk-WNWkprQyHVmcRmw';
+
+    let zuhause = [9.1982738, 48.8575]; // Fallback-Koordinaten: Kornwestheim
+    let fallback = true;
+    if ('{{ buerger_coords }}' != 'None') {
+      zuhause = JSON.parse('{{ buerger_coords|escapejs }}'); //escapejs -> sicheres Einfügen von JSON in JS
+      fallback = false;
+    }
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: zuhause,
+      zoom: 10
+    });
+
+    // Kai Singer
+
+    // Scroll-Zoom nur mit Strg-Taste aktivieren
+    map.scrollZoom.disable();
+    const mapContainer = map.getCanvasContainer();
+    mapContainer.addEventListener('wheel', (e) => {
+      if (e.ctrlKey) {
+        map.scrollZoom.enable();
+      } else {
+        map.scrollZoom.disable();
+      }
+    }, { passive: true });
+
+    // Sophie Schumann
+
+    const schulen = JSON.parse('{{ schulen_json|escapejs }}');
+    for (const schule of schulen) {
+      if (schule.coords) {
+        let farbe;
+        switch (schule.schulart) {
+          case "Kindergarten":
+            farbe = 'orange';
+            break;
+          case "Grundschule":
+            farbe = 'green';
+            break;
+          case "Hauptschule":
+            farbe = 'purple';
+            break;
+          case "Realschule":
+            farbe = 'yellow';
+            break;
+          case "Gymnasium":
+            farbe = 'pink';
+            break;
+          case "Berufsschule":
+            farbe = 'blue';
+            break;
+          default:
+            farbe = 'gray';
+        } 
+
+        new mapboxgl.Marker({ color: farbe })
+          .setLngLat([schule.coords.lng, schule.coords.lat])
+          .setPopup(new mapboxgl.Popup().setHTML(`<strong>${schule.name}</strong><br>${schule.adresse}`))
+          .addTo(map);
+      }
+    }
+    
+    if (fallback == false) {
+      new mapboxgl.Marker({ color: 'red' })
+        .setLngLat(zuhause)
+        .setPopup(new mapboxgl.Popup().setHTML("<strong>Zuhause</strong>"))
+        .addTo(map);
+    }
+  });
+</script>
+<!--Zurücksetzen button--> 
+<script>
+  function resetForm(button) {
+    const form = button.closest("form");
+    if (!form) return;
+
+    const inputs = form.querySelectorAll('input:not([type="hidden"])');
+    inputs.forEach(input => {
+      input.value = "";
+    });
+
+    const selects = form.querySelectorAll("select");
+    selects.forEach(select => {
+      select.value = "all";
+    });
+
+    form.submit();
+  }
+</script>
+ 
+{% endblock %}
+
+<!-- Louis Raisch -->
+
+{% block page_title %}Lebenslauf - Bürger{% endblock %}
+{% block header_title %}Lebenslauf - Bürger{% endblock %}
+
+{% block content %}
+
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/lebenslauf.png' %}">
+      <h1>Dein Lebenslauf</h1>
+    </div>
+    <p>In deinem Lebenslauf kannst du alle wichtigen Informationen zu deiner Person, deiner Ausbildung und deinen bisherigen Tätigkeiten übersichtlich verwalten. Er dient als Grundlage für deine Bewerbungen und hilft Arbeitgebern, sich ein genaues Bild von deinen Qualifikationen zu machen. Achte darauf, dass deine Angaben stets aktuell sind, um deine Chancen auf passende Stellen zu erhöhen. Du kannst hier neue Stationen hinzufügen, Dokumente hochladen und persönliche Stärken hervorheben. Ein gut strukturierter Lebenslauf zeigt Professionalität und verschafft dir einen klaren Vorteil bei der Auswahl durch potenzielle Arbeitgeber.</p>
+  </div>
+
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/ausweis.png' %}">
+      <h1>Deine Daten</h1>
+    </div>
+    <p><span class="bold">Name: </span>{{ stammdaten.name }}</p>
+    <p><span class="bold">Adresse: </span>{{ stammdaten.adresse }}</p>
+    <p><span class="bold">Geburtsdatum: </span>{{ stammdaten.geburtsdatum }}</p>
+  </div>
+
+<!-- Sophie Schumann -->
+
+{% if buerger_alter is not None and buerger_alter <= 21 %}
+  {% if not ist_in_schule %}
+    <div class="card">
+      <div class="header">
+        <img src="{% static 'imgs/schule.png' %}">
+        <h1>Schulstandorte</h1>
+      </div>
+      <div id="map"></div>
+      <p>▶ Zum Zoomen <span class="bold">Strg</span> drücken</p>
+      <ul class="mapbox_legend">
+        <li><span class="orange"></span>Kindergarten</li>
+        <li><span class="green"></span>Grundschule</li>
+        <li><span class="purple"></span>Hauptschule</li>
+        <li><span class="yellow"></span>Realschule</li>
+        <li><span class="pink"></span>Gymnasium</li>
+        <li><span class="blue"></span>Berufsschule</li>
+        {% if buerger_coords != None %}
+          <li><span class="red"></span>Dein Zuhause</li>
+        {% endif %}
+      </ul>
+    </div>
+    
+    <div class="card">
+      <div class="header">
+        <img src="{% static 'imgs/schule.png' %}">
+        <h1>Auswahl der Bildungseinrichtung</h1>
+      </div>
+      <p>Wähle eine passende Bildungseinrichtung aus folgender Liste aus:</p>
+
+      <form method="POST" class="table_filter mt">
+    {% csrf_token %}
+    <div class="table_group">
+      <label for="search">Kennwortsuche nach Bildungseinrichtung</label>
+      <input type="text" placeholder="Suche..." id="search" name="filter_schulen_kennwort"
+            value="{{ filter_schulen_kennwort }}">
+    </div>
+
+    <div class="table_group">
+      <label for="dropdown">Schulart</label>
+      <select name="filter_schulen_art" id="dropdown">
+        <option value="all">Alle</option>
+        <option value="Kindergarten" {% if filter_schulen_art == "Kindergarten" %}selected{% endif %}>Kindergarten</option>
+        <option value="Grundschule" {% if filter_schulen_art == "Grundschule" %}selected{% endif %}>Grundschule</option>
+        <option value="Hauptschule" {% if filter_schulen_art == "Hauptschule" %}selected{% endif %}>Hauptschule</option>
+        <option value="Realschule" {% if filter_schulen_art == "Realschule" %}selected{% endif %}>Realschule</option>
+        <option value="Gymnasium" {% if filter_schulen_art == "Gymnasium" %}selected{% endif %}>Gymnasium</option>
+        <option value="Berufsschule" {% if filter_schulen_art == "Berufsschule" %}selected{% endif %}>Berufsschule</option>
+      </select>
+    </div>
+    
+    <button type="submit">
+      <img src="{% static 'imgs/search.png' %}">
+    </button>
+    <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+  </form>
+
+      
+
+      <div class="table_container">
+        <table>
+          <thead>
+            <tr>
+              <th>Bildungseinrichtung</th>
+              <th>Schulart</th>
+              <th>Adresse</th>
+              <th>Verfügbare Plätze</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for schule in schulen %}
+            <tr>
+              <td>{{ schule.name }}</td>
+              <td>{{ schule.schulart }}</td>
+              <td>{{ schule.adresse }}</td>
+              <td>
+                {% if schule.plaetze_frei > 0 %}
+                  {{ schule.plaetze_frei }}
+                {% else %}
+                  <span class="danger bold">0</span>
+                {% endif %}
+              </td>
+              
+                <td>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="anmeldung">
+                    <input type="hidden" name="schule_id" value="{{ schule.id }}">
+                    <button type="submit" class="button success">
+                    Anmelden
+                    </button>
+                  </form>
+                </td>
+
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5">Keine Schulen verfügbar.</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <!-- Bürger ist aktuell in der Schule -->
+    <div class="card">
+      <div class="header">
+        <img src="{% static 'imgs/schule.png' %}">
+        <h1>Du bist aktuell in einer Bildungseinrichtung</h1>
+      </div>
+      <p>Da du momentan an einer Bildungseinrichtung eingeschrieben bist, werden keine weiteren Bildungseinrichtungen angezeigt. Erst wenn du dich abmeldest werden dir wieder Bildungseinrichtungen angezeigt.</p>
+    </div>
+  {% endif %}
+{% endif %}
+
+<!-- Louis Raisch -->
+
+  <div class="button_container">
+    <div class="actions">
+      <a href="{% url 'buerger_lebenslauf_download' %}" class="action_item">
+        <p>Lebenslauf runterladen</p>
+      </a>
+    </div>
+
+    <div class="actions">
+      <form method="POST" onsubmit="return confirm('Möchtest du dich wirklich arbeitslos melden?')">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="arbeitslos_melden">
+        <button type="submit" class="action_item">
+          <p>Arbeitslos melden</p>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {% now "Y-m-d" as heute %}
+  {% for eintrag in lebenslauf reversed %}
+    <div class="card">
+      <div class="header">
+        <h1>
+          {% if eintrag.art == "schueler" %}
+            Bildung
+          {% elif eintrag.art == "studium" %}
+            Studium
+          {% elif eintrag.art == "duales_studium" %}
+            Duales Studium
+          {% elif eintrag.art == "ausbildung" %}
+            Ausbildung
+          {% elif eintrag.art == "anstellung" %}
+            Anstellung
+          {% elif eintrag.art == "arbeitslos" %}
+            <span class="danger">Arbeitslosigkeit</span>
+          {% elif eintrag.art == "rente" %}
+            <span class="danger">Rente</span>
+          {% elif eintrag.art == "tot" %}
+            <span class="danger">Tot</span>
+          {% elif eintrag.art == "haft" %}
+            <span class="danger">In Haft</span>
+          {% else %}
+            {{ eintrag.art|title }}
+          {% endif %}
+        </h1>
+      </div>
+
+      <p>
+        <span class="bold">Zeitraum: </span>
+        {{ eintrag.beginn }} -
+        {% if eintrag.ende %}
+          {{ eintrag.ende }}
+        {% else %}
+          heute
+        {% endif %}
+      </p>
+
+      {% if eintrag.bildungseinrichtung %}
+        {% for s in schulen %}
+          {% if s.id == eintrag.bildungseinrichtung %}
+            <p><span class="bold">Bildungseinrichtung:</span> {{ s.name }}</p>
+            <p class="italic">{{ s.adresse }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if eintrag.arbeitgeber_name %}
+        <p><span class="bold">Arbeitgeber: </span>{{ eintrag.arbeitgeber_name }}</p>
+      {% endif %}
+
+      {% if eintrag.stellen_name %}
+        <p><span class="bold">Stelle: </span>{{ eintrag.stellen_name }}</p>
+      {% endif %}
+
+      {% if eintrag.zeugnis and eintrag.zeugnis.beschreibung %}
+        <div class="button_container">
+          <div class="button" onclick="openWindow('zeugnis_{{ forloop.counter }}')">
+            <p>Zeugnis ansehen</p>
+          </div>
+        </div>
+      {% endif %}
+      
+      <!-- Floating Window für Zeugnis -->
+      {% if eintrag.zeugnis and eintrag.zeugnis.beschreibung %}
+      <div class="floating_bg" id="fw_zeugnis_{{ forloop.counter }}">
+        <div class="floating_window card">
+
+          <button class="button danger fw_close_button"
+                  onclick="closeWindow('zeugnis_{{ forloop.counter }}')">
+            <img src="{% static 'imgs/close_white.png' %}">
+          </button>
+
+          <div class="header">
+            <img src="{% static 'imgs/zeugnis.png' %}">
+            <h1>Zeugnis</h1>
+          </div>
+
+          {% if eintrag.bildungseinrichtung %}
+            {% for s in schulen %}
+              {% if s.id == eintrag.bildungseinrichtung %}
+                <p><span class="bold">Bildungseinrichtung:</span> {{ s.name }}</p>
+                <p class="italic">{{ s.adresse }}</p>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+          <p><span class="bold">Art des Abschlusses:</span> {{ eintrag.zeugnis.beschreibung }}</p>
+
+          {% if eintrag.zeugnis.abschlussnote %}
+            <p><span class="bold">Abschlussnote:</span>
+              <span class="success">{{ eintrag.zeugnis.abschlussnote }}</span>
+            </p>
+          {% endif %}
+
+          {% if eintrag.zeugnis.datei %}
+            <a href="{{ eintrag.zeugnis.datei }}" class="button success" target="_blank">
+              <img src="{% static 'imgs/download.png' %}">
+              <p>PDF herunterladen</p>
+            </a>
+          {% endif %}
+
+        </div>
+      </div>
+      {% endif %}
+
+      {% if eintrag.art not in deaktivierte_arten %}
+        {% if eintrag.ende == False or eintrag.ende > heute %}
+          <form method="POST" class="button_container"
+                onsubmit="return confirm('Möchtest du dieses Verhältnis wirklich vorzeitig beenden?');">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="lebenslauf_beenden">
+            <input type="hidden" name="index" value="{{ forloop.counter0 }}">
+            <button type="submit" class="button danger">
+              Verhältnis beenden
+            </button>
+          </form>
+        {% endif %}
+      {% endif %}
+
+
+    </div>
+  {% empty %}
+    <div class="card">
+      <p>Für Dich sind aktuell keine Lebenslaufdaten hinterlegt.</p>
+    </div>
+  {% endfor %}
+
+{% endblock %}

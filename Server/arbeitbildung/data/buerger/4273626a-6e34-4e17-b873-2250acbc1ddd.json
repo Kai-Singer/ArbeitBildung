@@ -1,0 +1,31 @@
+{
+  "id": "4273626a-6e34-4e17-b873-2250acbc1ddd",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-10",
+      "ende": false,
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0007",
+      "stelle": "s0003",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "arbeitgeber": "u0007",
+      "stelle": "s0003",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "RKH Klinikum",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen RKH Klinikum für die Stelle Arzt anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block header_title %}Willkommen zurück, {{ username }}!{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/bear.png' %}">
+      <h1>Test Überschrift</h1>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga perferendis, tempora dolores consequatur quasi rerum? Ullam, quidem praesentium nihil autem laudantium facere cum magni labore dolor nisi impedit dolorem quasi exercitationem deserunt quisquam architecto ratione at a repudiandae accusantium inventore doloribus debitis? Cum eius beatae tenetur labore distinctio expedita quis, maiores officiis. Culpa modi obcaecati, delectus commodi velit debitis aperiam ullam asperiores officiis eveniet magni sapiente cumque voluptas tenetur reprehenderit necessitatibus quam voluptatibus facere placeat omnis consequatur facilis eum dolor accusantium. Alias laudantium debitis harum blanditiis eum maiores quibusdam, odit animi voluptatum, similique itaque vel facilis nulla nemo assumenda sed corrupti non exercitationem dolore tempora voluptatem aspernatur cupiditate culpa repellat. Fuga quasi culpa facere explicabo quos quia, suscipit necessitatibus numquam excepturi voluptatem nam pariatur ab sed, doloremque veritatis doloribus, illum cumque quidem ad debitis sint libero. Dolorum voluptatem natus architecto, ipsam possimus recusandae laudantium dolor quasi minima tenetur suscipit nisi. Non, perspiciatis. Autem inventore aspernatur assumenda hic expedita quam dolorem qui adipisci nihil fugiat earum voluptas, sint fuga, facere pariatur doloremque. Sed hic illo ut quae rem non optio minima, at, veritatis culpa tenetur ea earum aliquam blanditiis porro assumenda modi cumque corporis doloribus exercitationem labore voluptate aliquid aut! Assumenda!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius maxime ipsa quo ut. Sint facilis dolor quas dolores reiciendis dolorem, laudantium mollitia, ipsum, non cupiditate quidem architecto sequi voluptas? Minima labore harum possimus neque molestias, voluptatibus modi odit nam velit nisi quod nemo. Ipsum quam quibusdam dolores fugiat, consequuntur sequi, obcaecati modi, sint porro necessitatibus minus maiores facilis inventore blanditiis nam delectus adipisci reiciendis ducimus deleniti accusamus alias eaque dolorem quae laboriosam. Vel labore reiciendis, mollitia quia beatae necessitatibus consectetur aut itaque dolor dolore earum expedita, corporis vitae! Nesciunt distinctio expedita cumque sequi illo tenetur exercitationem earum recusandae ducimus. Ipsam esse tempora quas est! Esse molestias dolorem necessitatibus in harum, reiciendis aut incidunt similique facilis officia ex mollitia deserunt debitis odit voluptatum, quo voluptatem eveniet iure veritatis fugiat eaque. Itaque nesciunt sed ipsum ratione. Architecto quos distinctio voluptate in nostrum aliquid saepe eaque ullam, id, ad quia deleniti laborum est nihil! A, tempore animi! Obcaecati ea, quas dolore odio exercitationem saepe assumenda dolorum vitae, consectetur vel mollitia nisi dolorem dicta. Culpa perferendis perspiciatis enim accusantium hic! Debitis unde molestiae dolorum. Molestiae sunt harum aliquam voluptates, aperiam quas mollitia nam ducimus qui sed enim ipsam ratione exercitationem iusto incidunt error porro!</p>
+    <div class="card_img">
+      <img src="{% static 'imgs/cat.png' %}" alt="Eine Katze">
+      <p>Eine Katze</p>
+    </div>
+    <p>In Texten können die Highlight Styles <span class="danger">danger</span>, <span class="warning">warning</span>, <span class="success">success</span>, <span class="accent">accent</span>, <span class="bold">bold</span> und <span class="italic">italic</span> gewählt werden. Außerdem können diese <span class="danger bold italic">beliebig</span> gemischt werden. Auch Buttons in den Cards oder im Dashboard können diese Highlights als Hintergrundfarbe besitzen. Auch ein Bild kann neben diesen eingefügt werden, genauso wie neben jedem Titel im Dashboard oder einer Card.</p>
+    <div class="button_container">
+      <div class="button">
+        <img src="{% static 'imgs/bird.png' %}">
+        <p>Button</p>
+      </div>
+      <div class="button danger">
+        <p>Danger Button</p>
+      </div>
+      <div class="button warning">
+        <p>Warning Button</p>
+      </div>
+      <div class="button success">
+        <p>Success Button</p>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard">
+    <div class="dashboard_item">
+      <div class="header">
+        <img src="{% static 'imgs/bug.png' %}">
+        <h1>Dashboard Item 1</h1>
+      </div>
+      <p>Inhalt für Dashboard Item 1.<br>Ein Dashboard Item sollte immer nur je ein p-Element besitzen.<br>Dieses kann aber belibig viele Zeilen besitzen.</p>
+    </div>
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Dashboard Item 2</h1>
+      </div>
+      <p>Inhalt für Dashboard Item 2</p>
+      <div class="button_container">
+        <div class="button">
+          <img src="{% static 'imgs/cow.png' %}">
+          <p>Button 1</p>
+        </div>
+        <div class="button">
+          <p>Button 2</p>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Dashboard Item 3</h1>
+      </div>
+      <p>Inhalt für Dashboard Item 3</p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="action_item">
+      <img src="{% static 'imgs/dog.png' %}">
+      <p>Action Item 1</p>
+    </div>
+    <div class="action_item">
+      <p>Action Item 2</p>
+    </div>
+    <div class="action_item">
+      <p>Action Item 3</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/fish.png' %}">
+      <h1>Liste</h1>
+    </div>
+    <div class="table_filter">
+      <div class="table_group">
+        <label for="search">Kennwortsuche</label>
+        <input type="text" placeholder="Suche..." id="search" name="search">
+      </div>
+      <div class="table_group">
+        <label for="dropdown">Dropdownauswahl</label>
+        <select name="dropdown" id="dropdown">
+          <option value="all">Alle</option>
+          <option value="1">Auswahl 1</option>
+          <option value="2">Auswahl 2</option>
+          <option value="3">Auswahl 3</option>
+        </select>
+      </div>
+      <button type="reset">Zurücksetzen</button>
+      <button type="submit">
+        <img src="{% static 'imgs/search.png' %}">
+      </button>
+    </div>
+    <div class="table_container">
+      <table>
+        <thead>
+          <tr>
+            <th>Bild</th>
+            <th>Datum</th>
+            <th>Name</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="{% static 'imgs/horse.png' %}"></td>
+            <td>13.04.2025</td>
+            <td>Max Mustermann</td>
+            <td>
+              <div class="table_buttons">
+                <div class="button">Button 1</div>
+                <div class="button danger">Button 2</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="{% static 'imgs/pig.png' %}"></td>
+            <td>13.04.2025</td>
+            <td>Max Mustermann</td>
+            <td>
+              <div class="table_buttons">
+                <div class="button">Button 1</div>
+                <div class="button danger">Button 2</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="{% static 'imgs/bear.png' %}"></td>
+            <td>13.04.2025</td>
+            <td>Max Mustermann</td>
+            <td>
+              <div class="table_buttons">
+                <div class="button">Button 1</div>
+                <div class="button danger">Button 2</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>-</td>
+            <td>13.04.2025</td>
+            <td>Max Mustermann</td>
+            <td>
+              <div class="table_buttons">
+                <div class="button">Button 1</div>
+                <div class="button danger">Button 2</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{
+  "id": "a029e720-d429-4799-8fd4-076ae053bfd6",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-08",
+      "ende": "2026-01-14",
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0004",
+      "stelle": "s0001",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerber": "a029e720-d429-4799-8fd4-076ae053bfd6",
+      "stelle": "s0001",
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "32f03c03-0af2-4ae8-8b6b-f94246b1d2f2",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "37174cfc-5603-4c2f-88b2-f5f8b1ef51fd",
+      "stelle": "s0003",
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "System",
+      "beschreibung": "Deine letzte Beschäftigung wurde aufgrund deines Berufsverbots beendet.",
+      "verlinkung": "/buerger/lebenslauf",
+      "status": true
+    },
+    {
+      "sender": "System",
+      "beschreibung": "Aufgrund deines Berufsverbots wurden alle deine aktuellen Bewerbungen, die davon betroffen sind, zurückgezogen.",
+      "verlinkung": "/buerger/bewerbungen",
+      "status": true
+    },
+    {
+      "sender": "Landtag von Baden-Württemberg",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Landtag von Baden-Württemberg für die Stelle Legislative anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

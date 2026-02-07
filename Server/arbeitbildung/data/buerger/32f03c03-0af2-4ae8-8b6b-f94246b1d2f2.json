@@ -1,0 +1,31 @@
+{
+  "id": "32f03c03-0af2-4ae8-8b6b-f94246b1d2f2",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-10",
+      "ende": false,
+      "art": "anstellung",
+      "bildungseinrichtung": false,
+      "arbeitgeber": "u0004",
+      "stelle": "s0002",
+      "zeugnis": {}
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerbungsdatum": "2026-01-10",
+      "rückmeldedatum": "2026-01-10",
+      "arbeitgeber": "u0004",
+      "stelle": "s0002",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Landtag von Baden-Württemberg",
+      "beschreibung": "Herzlichen Glückwunsch! Ihre Bewerbung wurde beim Unternehmen Landtag von Baden-Württemberg für die Stelle Legislative anegnommen. ",
+      "verlinkung": "http://[2001:7c0:2320:2:f816:3eff:feb6:6731]:8000/buerger/bewerbungen",
+      "status": true
+    }
+  ]
+}

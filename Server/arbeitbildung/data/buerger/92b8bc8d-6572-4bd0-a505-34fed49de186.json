@@ -1,0 +1,55 @@
+{
+  "id": "92b8bc8d-6572-4bd0-a505-34fed49de186",
+  "lebenslauf": [
+    {
+      "beginn": "2026-01-12",
+      "ende": "2026-01-12",
+      "art": "schueler",
+      "bildungseinrichtung": "b0008",
+      "arbeitgeber": false,
+      "stelle": false,
+      "zeugnis": {}
+    },
+    {
+      "beginn": "2026-01-12",
+      "ende": "2026-01-12",
+      "art": "arbeitslos",
+      "bildungseinrichtung": false,
+      "arbeitgeber": false,
+      "stelle": false,
+      "zeugnis": {}
+    },
+    {
+      "beginn": "2026-01-12",
+      "ende": "2026-01-12",
+      "art": "schueler",
+      "bildungseinrichtung": "b0009",
+      "arbeitgeber": false,
+      "stelle": false,
+      "zeugnis": {
+        "beschreibung": "War unartig",
+        "abschlussnote": "6"
+      }
+    },
+    {
+      "beginn": "2026-01-12",
+      "ende": "2026-01-12",
+      "art": "schueler",
+      "bildungseinrichtung": "b0009",
+      "arbeitgeber": false,
+      "stelle": false,
+      "zeugnis": {
+        "beschreibung": "Hat sich gebessert",
+        "abschlussnote": "3"
+      }
+    }
+  ],
+  "bewerbungen": [],
+  "postfach": [
+    {
+      "sender": "System",
+      "beschreibung": "Du wurdest als arbeitslos gemeldet. Lebenslauf und Register wurden aktualisiert.",
+      "status": true
+    }
+  ]
+}

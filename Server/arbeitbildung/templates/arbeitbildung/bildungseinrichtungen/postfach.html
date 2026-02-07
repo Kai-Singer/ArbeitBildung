@@ -1,0 +1,62 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Postfach - Bildungseinrichtung{% endblock %}
+
+{% block header_title %}Postfach - Bildungseinrichtung{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/brief.png' %}">
+      <h1>Dein Postfach</h1>
+    </div>
+    <p>Dein Postfach ist die zentrale Schnittstelle für alle Nachrichten, die deine Bildungseinrichtung betreffen. Hier empfängst du Mitteilungen vom System, Rückmeldungen zu Anfragen und wichtige Informationen bezüglich deiner Schüler. Jede Nachricht ist übersichtlich organisiert, damit du mühelos den Überblick behältst. Du kannst neue Mitteilungen sofort lesen, direkt beantworten oder archivieren, um dein Postfach jederzeit aufgeräumt zu halten. So stellst du sicher, dass du keine relevanten administrativen oder pädagogischen Informationen verpasst. Das Postfach ermöglicht eine einfache und effiziente Kommunikation innerhalb deines Schulnetzwerks.</p>
+  </div>
+  <div class="actions">
+    <form method="post">
+      {% csrf_token %}
+        <input type="hidden" name="alle_gelesen"> 
+        <button type="submit" class="action_item">Alle als gelesen markieren</button>
+    </form>
+  </div>
+
+  {% for nachricht in postfach %}
+   <div class="card">
+    <div class="header">
+      <h1>{{ nachricht.sender }}</h1>
+    </div>
+    <p>{{ nachricht.beschreibung }}<p>
+
+    <div class="button_container">
+    {% if nachricht.verlinkung %}
+      <div class="button">
+        <a href="{{ nachricht.verlinkung }}">
+          {% if "schueler" in nachricht.verlinkung %}
+            Schueler
+          {% elif "dashboard" in nachricht.verlinkung %}
+            Dashboard
+           {% else %}
+            Zur Seite
+          {% endif %}
+        </a>
+      </div>
+      {% endif %}
+
+    {% if nachricht.status %}
+        <form method="post">
+          {% csrf_token %}
+            <input type="hidden" name="index" value="{{ forloop.counter0 }}">
+            <button type="submit" class="button success">Als gelesen markieren</button>
+        </form>
+      {% else %}
+      <div class="button disabled">
+        <p>Als gelesen markiert</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+ {% endfor %}
+{% endblock %}

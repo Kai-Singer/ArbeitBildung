@@ -1,0 +1,320 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}
+<script>
+  function resetForm(button) {
+    const form = button.closest("form");
+    if (!form) return;
+
+    const inputs = form.querySelectorAll('input:not([type="hidden"])');
+    inputs.forEach(input => {
+      input.value = "";
+    });
+
+    const selects = form.querySelectorAll("select");
+    selects.forEach(select => {
+      select.value = "all";
+    });
+
+    form.submit();
+  }
+</script>
+{% endblock %}
+
+{% block page_title %}Statistiken - Admin{% endblock %}
+{% block header_title %}Statistiken - Admin{% endblock %}
+
+{% block content %}
+
+  <!-- Einleitung -->
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/statistik.png' %}">
+      <h1>Deine Statistiken</h1>
+    </div>
+
+    <p>
+      Das Statistik-Interface bietet Administratoren einen umfassenden Überblick über alle relevanten Systemdaten.
+      Es ermöglicht die schnelle Analyse von Nutzeraktivitäten, Zugriffszahlen und Leistungskennzahlen in Echtzeit.
+      Durch übersichtliche Diagramme und klare Kennzahlen lassen sich Trends frühzeitig erkennen und fundierte
+      Entscheidungen treffen. Filter- und Suchfunktionen erleichtern das gezielte Auswerten bestimmter Zeiträume
+      oder Benutzergruppen. Zusätzlich unterstützt das Interface bei der Überwachung von Systemauslastung,
+      Fehlermeldungen und sicherheitsrelevanten Ereignissen. Damit stellt es ein zentrales Werkzeug dar,
+      um die Plattform effizient zu verwalten und kontinuierlich zu verbessern.
+    </p>
+  </div>
+
+  <!-- NAVIGATION/ÜBERSICHT -->
+  <div class="actions">
+    <a class="action_item" href="#section_users">
+      <img src="{% static 'imgs/nutzerstatistik.png' %}">
+      <p>Nutzerstatistik</p>
+    </a>
+
+    <a class="action_item" href="#section_schools">
+      <img src="{% static 'imgs/schule.png' %}">
+      <p>Bildungseinrichtungen</p>
+    </a>
+
+    <a class="action_item" href="#section_jobs">
+      <img src="{% static 'imgs/arbeit.png' %}">
+      <p>Arbeitsmarkt</p>
+    </a>
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- 1. NUTZERSTATISTIK -->
+  <!-- ===================================================== -->
+  <div class="card" id="section_users">
+    <div class="header">
+      <img src="{% static 'imgs/nutzerstatistik.png' %}">
+      <h1>Nutzerstatistik der Bürger</h1>
+    </div>
+    <p>Dieser Bereich zeigt zentrale Indikatoren zur Bürgerstruktur: Altersverteilung, Statusgruppen, Arbeitslosenquote und Bildungsniveau.</p><br>
+
+    <!-- KPIs -->
+    <div class="dashboard">
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/menschen.png' %}"><h1>Bürger Gesamt</h1></div>
+        <p>{{ total_citizens|default:"–" }}</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/arbeitslos.png' %}"><h1>Arbeitslosenquote</h1></div>
+        <p>{{ arbeitslosenquote|default:"–" }}%</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/studium.png' %}"><h1>Ø Bildungsdauer</h1></div>
+        <p>{{ bildungsdauer|default:"–" }} Jahre</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/lebenslauf.png' %}"><h1>Ø Lebenslauf-Einträge</h1></div>
+        <p>{{ lebenslauf_eintraege|default:"–" }}</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="header">
+        <!-- <img src="{% static 'imgs/dashboard.png' %}"> -->
+        <h1>Statusverteilung</h1>
+      </div>
+        <div class="card_img">
+          <img src="{% static 'imgs/statusverteilung_chart.png' %}">
+          <p>Status (Schüler, Studium, Arbeit, Arbeitslos, Rente)</p>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- 2. BILDUNGSEINRICHTUNGEN -->
+  <!-- ===================================================== -->
+  <div class="card" id="section_schools">
+    <div class="header">
+      <img src="{% static 'imgs/schule.png' %}">
+      <h1>Bildungseinrichtungen – Gesamtüberblick</h1>
+    </div>
+    <p>Statistik über freie Plätze, Schularten, Auslastung und Verteilung.</p><br>
+
+    <!-- KPIs Bildung -->
+    <div class="dashboard">
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/aktiv.png' %}"><h1>Aktive Schulen</h1></div>
+        <p>{{ anzahl_schulen|default:"–" }}</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/menschen.png' %}"><h1>Plätze gesamt</h1></div>
+        <p>{{ plaetze_gesamt|default:"–" }}</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/offen.png' %}"><h1>Freie Plätze</h1></div>
+        <p>{{ plaetze_frei|default:"–" }}</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/diagramm.png' %}"><h1>Ø Auslastung</h1></div>
+        <p>{{ auslastung_avg|default:"–" }}%</p>
+      </div>
+    </div>
+
+    <!-- Diagramme Bildung -->
+    <div class="mt">
+      <div class="header">
+        <!-- <img src="{% static 'imgs/dashboard.png' %}"> -->
+        <h1>Verteilung der Schularten</h1>
+      </div>
+      <div class="card_img">
+        <img src="{% static 'imgs/schularten_chart.png' %}">
+        
+      </div>
+    </div>
+
+  
+
+<!-- Schulliste mit Filter -->
+<div class="mt">
+  <div class="header">
+    <h1>Details zu allen Bildungseinrichtungen</h1>
+  </div>
+
+  <!-- FILTER-FORM (wie bei Bewerbungen) -->
+  <form class="table_filter mt" method="post" action="{% url 'admin/statistiken' %}#section_schools">
+    {% csrf_token %}
+
+    <div class="table_group">
+      <label for="school_search">Suche</label>
+      <input
+        type="text"
+        id="school_search"
+        name="filter_schulen_kennwort"
+        placeholder="Name der Schule"
+        value="{{ filter_schulen_kennwort }}"
+      >
+    </div>
+
+    
+  <div class="table_group">
+    <label for="dropdown">Schulart</label>
+    <select name="filter_schulen_art" id="dropdown">
+      <option value="all">Alle</option>
+      <option value="Kindergarten" {% if filter_schulen_art == "Kindergarten" %}selected{% endif %}>Kindergarten</option>
+      <option value="Grundschule" {% if filter_schulen_art == "Grundschule" %}selected{% endif %}>Grundschule</option>
+      <option value="Hauptschule" {% if filter_schulen_art == "Hauptschule" %}selected{% endif %}>Hauptschule</option>
+      <option value="Realschule" {% if filter_schulen_art == "Realschule" %}selected{% endif %}>Realschule</option>
+      <option value="Gymnasium" {% if filter_schulen_art == "Gymnasium" %}selected{% endif %}>Gymnasium</option>
+      <option value="Berufsschule" {% if filter_schulen_art == "Berufsschule" %}selected{% endif %}>Berufsschule</option>
+    </select>
+  </div>
+
+
+    <button type="button" class="button danger" onclick="resetForm(this)">
+      Zurücksetzen
+    </button>
+
+    <button type="submit">
+      <img src="{% static 'imgs/search.png' %}">
+    </button>
+  </form>
+
+  <!-- TABELLE -->
+  <div class="table_container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Schulart</th>
+          <th>Plätze</th>
+          <th>Frei</th>
+          <th>Auslastung</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in schulen %}
+        <tr>
+          <td>{{ s.name }}</td>
+          <td>{{ s.schulart }}</td>
+          <td>{{ s.plaetze_gesamt }}</td>
+          <td>{{ s.plaetze_frei }}</td>
+          <td>{{ s.auslastung }}%</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5">Keine Schulen gefunden.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+  <!-- ===================================================== -->
+  <!-- 3. ARBEITSMARKT -->
+  <!-- ===================================================== -->
+  <div class="card" id="section_jobs">
+    <div class="header">
+      <img src="{% static 'imgs/arbeit.png' %}">
+      <h1>Arbeitsmarkt & Bewerbungen</h1>
+    </div>
+    <p>Überblick über Stellenanzeigen, Bewerbungen und Statusentwicklung.</p><br>
+
+    <div class="dashboard">
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/aktiv.png' %}"><h1>Aktive Stellen</h1></div>
+        <p>{{ aktive_stellen|default:"–" }}</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/bewerbung.png' %}"><h1>Bewerbungen</h1></div>
+        <p>{{ bewerbungen_gesamt|default:"–" }}</p>
+      </div>
+
+      <div class="dashboard_item">
+        <div class="header"><img src="{% static 'imgs/diagramm.png' %}"><h1>Ø Bewerbungen/Stelle</h1></div>
+        <p>{{ avg_bewerbungen|default:"–" }}</p>
+      </div>
+    </div>
+
+    <div class="mt">
+      <div class="header">
+        <!-- <img src="{% static 'imgs/dashboard.png' %}"> -->
+        <h1>Bewerbungsstatus</h1>
+      </div>
+      <div class="card_img">
+        <img src="{% static 'imgs/bewerbungsstatus_chart.png' %}">
+        <p>Statusverteilung aller Bewerbungen</p>
+      </div>
+    </div>
+
+    <!-- Stellenliste mit Filter -->
+    <div class="mt">
+      <div class="header">
+        <!-- <img src="{% static 'imgs/dashboard.png' %}"> -->
+        <h1>Stellenübersicht (aktive Stellen)</h1>
+      </div>
+
+      <form class="table_filter" method="post" action="{% url 'admin/statistiken' %}#stellen">
+      {% csrf_token %}
+        <div class="table_group">
+          <label for="stellen_unternehmen_id">Suche</label>
+          <input type="text" id="stellen_kennwortsuche_id" name="filter_stellen_kennwortsuche" placeholder="Unternehmen oder Stelle..." value="{{ filter_stellen_kennwortsuche }}">
+        </div>
+        <button type="button" class="button danger" onclick="resetForm(this)">Zurücksetzen</button>
+        <button type="submit">
+          <img src="{% static 'imgs/search.png' %}">
+        </button>
+      </form>
+
+      <div class="table_container">
+        <table>
+          <thead>
+            <tr>
+              <th>Unternehmen</th>
+              <th>Stelle</th>
+              <th>Bewerber</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for j in stellen %}
+            <tr>
+              <td>{{ j.unternehmen }}</td>
+              <td>{{ j.bezeichnung }}</td>
+              <td>{{ j.bewerbungen }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}

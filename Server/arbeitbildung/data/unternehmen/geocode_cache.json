@@ -1,0 +1,30 @@
+{
+  "Kurze Str. 33, 71332 Waiblingen": {
+    "lat": 48.83198,
+    "lng": 9.3170956
+  },
+  "Danziger Straße 40, 71638 Ludwigsburg": {
+    "lat": 48.8883127,
+    "lng": 9.2088804
+  },
+  "Hauffstr. 5, 70190 Stuttgart": {
+    "lat": 48.7870922,
+    "lng": 9.1905484
+  },
+  "Konrad-Adenauer-Straße 3, 70173 Stuttgart": {
+    "lat": 48.7786128,
+    "lng": 9.1834774
+  },
+  "Kriegsbergstraße 60, 70174 Stuttgart": {
+    "lat": 48.7836539,
+    "lng": 9.170467
+  },
+  "Pfaffenwaldring 1, 70569 Stuttgart": {
+    "lat": 48.7474667,
+    "lng": 9.1095668
+  },
+  "Posilipostraße 4, 71640 Ludwigsburg": {
+    "lat": 48.8989021,
+    "lng": 9.2035793
+  }
+}

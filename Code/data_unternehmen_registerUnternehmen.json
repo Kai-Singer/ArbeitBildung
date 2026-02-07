@@ -1,0 +1,37 @@
+[
+    {
+        "id": "u0001",
+        "name": "Stadtverwaltung Waiblingen",
+        "passwort": "123"
+    },
+    {
+        "id": "u0002",
+        "name": "Katharinenhospital",
+        "passwort": "123"
+    },
+    {
+        "id": "u0003",
+        "name": "Polizeipr\u00e4sidium Ludwigsburg",
+        "passwort": "123"
+    },
+    {
+        "id": "u0004",
+        "name": "Landtag von Baden-W\u00fcrttemberg",
+        "passwort": "123"
+    },
+    {
+        "id": "u0005",
+        "name": "Amtsgericht Stuttgart",
+        "passwort": "123"
+    },
+    {
+        "id": "u0006",
+        "name": "Universit\u00e4t Stuttgart",
+        "passwort": "123"
+    },
+    {
+        "id": "u0007",
+        "name": "RKH Klinikum",
+        "passwort": "123"
+    }
+]

@@ -1,0 +1,108 @@
+{% extends 'arbeitbildung/base.html' %}
+{% load static %}
+{% block extra_stylesheets %}{% endblock %}
+{% block extra_scripts %}{% endblock %}
+
+{% block page_title %}Dashboard - Bürger{% endblock %}
+
+{% block header_title %}Willkommen zurück, {{ username }}! - Bürger{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/dashboard.png' %}">
+      <h1>Dein Dashboard</h1>
+    </div>
+    <p>Willkommen in deinem persönlichen Dashboard! Hier behältst du jederzeit den Überblick über alle wichtigen Bereiche deiner beruflichen Laufbahn. Du siehst auf einen Blick deine aktuellen Bewerbungen, offenen Nachrichten und laufenden Tätigkeiten. Außerdem kannst du schnell zu deinem Lebenslauf, der Jobbörse oder deinen Bewerbungsunterlagen navigieren. Das Dashboard hilft dir dabei, deine nächsten Schritte zu planen und dich gezielt auf neue Chancen vorzubereiten. Egal, ob du gerade auf Jobsuche bist oder einfach deinen Profilstatus prüfen möchtest - hier findest du alles an einem zentralen Ort.</p>
+  </div>
+  <div class="dashboard">
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Aktuelle Beschäftigung</h1>
+      </div>
+      {% if aktuelle_beschaeftigung %}
+        <p>
+          <span class="bold">
+            {{ aktuelle_beschaeftigung.art }}
+          </span>
+          {% if aktuelle_beschaeftigung.arbeitgeber %}
+            <br>{{ aktuelle_beschaeftigung.stelle }} - {{ aktuelle_beschaeftigung.arbeitgeber }}
+          {% elif aktuelle_beschaeftigung.bildungseinrichtung %}
+            <br>{{ aktuelle_beschaeftigung.bildungseinrichtung }}
+          {% endif %}
+          {% if aktuelle_beschaeftigung.beginn %}
+            <br>Seit {{ aktuelle_beschaeftigung.beginn }}
+          {% endif %}
+        </p>
+      {% else %}
+        <p>Keine aktuelle Beschäftigung</p>
+      {% endif %}
+    </div>
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Offene Bewerbungen</h1>
+      </div>
+      {% if offene_bewerbungen_anzahl > 0 %}
+        <p>
+          {{ offene_bewerbungen_anzahl }} Bewerbung{% if offene_bewerbungen_anzahl != 1 %}en{% endif %}
+        </p>
+      {% else %}
+        <p>
+          Keine offenen Bewerbungen
+        </p>
+      {% endif %}
+    </div>
+    <div class="dashboard_item">
+      <div class="header">
+        <h1>Ungelesene Nachrichten</h1>
+      </div>
+
+      {% if ungelesene_nachrichten_anzahl > 0 %}
+        <p>
+          {{ ungelesene_nachrichten_anzahl }} Nachricht{% if ungelesene_nachrichten_anzahl != 1 %}en{% endif %}
+        </p>
+      {% else %}
+        <p>
+          Keine ungelesenen Nachrichten
+        </p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="actions">
+    <a class="action_item" href="{% url 'buerger/lebenslauf' %}">
+      <img src="{% static 'imgs/lebenslauf.png' %}">
+      <p>Lebenslauf</p>
+    </a>
+    <a class="action_item" href="{% url 'buerger/jobboerse' %}">
+      <img src="{% static 'imgs/jobboerse.png' %}">
+      <p>Jobbörse</p>
+    </a>
+    <a class="action_item" href="{% url 'buerger/bewerbungen' %}">
+      <img src="{% static 'imgs/bewerbung.png' %}">
+      <p>Bewerbungen</p>
+    </a>
+    <a class="action_item" href="{% url 'buerger/postfach' %}">
+      <img src="{% static 'imgs/brief.png' %}">
+      <p>Postfach</p>
+    </a>
+  </div>
+  <div class="card">
+    <div class="header">
+      <img src="{% static 'imgs/support.png' %}">
+      <h1>Kontakt und Support</h1>
+    </div>
+    <p>Wenn du Fragen hast oder technische Unterstützung benötigst, kannst du dich jederzeit an unser Support-Team wenden. Wir helfen dir gerne weiter und melden uns so schnell wie möglich zurück.</p>
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="table_filter no_mb mt">
+        <div class="table_group">
+          <label for="betrag">Nachricht</label>
+          <textarea id="nachricht" name="nachricht" placeholder="Deine Nachricht" required></textarea>
+        </div>
+        <button type="submit" class="button success">
+          <p>Abschicken</p>
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

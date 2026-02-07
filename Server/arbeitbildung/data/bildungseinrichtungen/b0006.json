@@ -1,0 +1,11 @@
+{
+    "id": "b0006",
+    "aktiv": true,
+    "name": "Kaufmännische Schule Waiblingen",
+    "schulart": "Berufsschule",
+    "adresse": "Steinbeisstraße 4, 71332 Waiblingen",
+    "plaetze_gesamt": "40",
+    "dauer": "3",
+    "schueler": [],
+    "postfach": []
+}

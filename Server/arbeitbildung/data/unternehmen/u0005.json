@@ -1,0 +1,159 @@
+{
+  "id": "u0005",
+  "aktiv": true,
+  "name": "Amtsgericht Stuttgart",
+  "adresse": "Hauffstr. 5, 70190 Stuttgart",
+  "stellen": [
+    {
+      "id": "s0001",
+      "aktiv": true,
+      "bezeichnung": "Richter",
+      "beschreibung": "Als Richterin oder Richter in der Zivilabteilung entscheiden Sie eigenständig über zivilrechtliche Streitigkeiten, insbesondere aus dem Vertrags-, Miet- und Schadensersatzrecht. Sie leiten mündliche Verhandlungen, würdigen Sach- und Rechtslage und verfassen Urteile sowie Beschlüsse. Darüber hinaus gehören die Verfahrenssteuerung, Beweisaufnahmen und die Zusammenarbeit mit Rechtsanwälten, Parteien und der Geschäftsstelle zu Ihren Aufgaben.",
+      "bereiche": [
+        "Zivilrecht",
+        "Verhandlung",
+        "Urteilsfindung",
+        "Verfahrensleitung"
+      ],
+      "voraussetzungen": "Befähigung zum Richteramt (beide Staatsexamina), hohe Entscheidungsfähigkeit sowie ausgeprägte rechtliche Analysekompetenz.",
+      "gehalt": 6800,
+      "buerger": "67b7b148-2c38-4b5d-826b-978b7644a79d",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0002",
+      "aktiv": true,
+      "bezeichnung": "Richter",
+      "beschreibung": "In der Strafabteilung sind Sie für die Durchführung und Leitung strafrechtlicher Hauptverhandlungen zuständig. Sie entscheiden über Schuld- und Straffragen, erlassen Strafbefehle und treffen verfahrensleitende Entscheidungen. Zudem wirken Sie bei Haftfragen, Beweisaufnahmen und der Rechtsfolgenbestimmung mit. Die Tätigkeit erfordert eine sorgfältige Abwägung zwischen staatlichem Strafanspruch und den Rechten der Angeklagten.",
+      "bereiche": [
+        "Strafrecht",
+        "Hauptverhandlung",
+        "Strafzumessung",
+        "Verfahrensrecht"
+      ],
+      "voraussetzungen": "Befähigung zum Richteramt, Belastbarkeit sowie Interesse am Strafrecht und an der Sitzungsleitung.",
+      "gehalt": 7000,
+      "buerger": "e99aa463-ddaf-4986-852b-681067014e55",
+      "besetzt": true,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0003",
+      "aktiv": true,
+      "bezeichnung": "Richter",
+      "beschreibung": "Als Richterin oder Richter am Familiengericht entscheiden Sie über familienrechtliche Angelegenheiten wie Scheidung, Unterhalt, Sorgerecht und Umgangsregelungen. Sie führen Anhörungen durch, treffen einstweilige Anordnungen und arbeiten eng mit Jugendämtern, Verfahrensbeiständen und Sachverständigen zusammen. Ein besonderes Augenmerk liegt auf der sachgerechten und einfühlsamen Verfahrensführung in sensiblen Lebenssituationen.",
+      "bereiche": [
+        "Familienrecht",
+        "Anhörung",
+        "Kindeswohl",
+        "Entscheidung"
+      ],
+      "voraussetzungen": "Befähigung zum Richteramt sowie soziale Kompetenz und Verantwortungsbewusstsein.",
+      "gehalt": 7200,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0004",
+      "aktiv": true,
+      "bezeichnung": "Richter",
+      "beschreibung": "Als Richterin oder Richter am Familiengericht entscheiden Sie über familienrechtliche Angelegenheiten wie Scheidung, Unterhalt, Sorgerecht und Umgangsregelungen. Sie führen Anhörungen durch, treffen einstweilige Anordnungen und arbeiten eng mit Jugendämtern, Verfahrensbeiständen und Sachverständigen zusammen. Ein besonderes Augenmerk liegt auf der sachgerechten und einfühlsamen Verfahrensführung in sensiblen Lebenssituationen.",
+      "bereiche": [
+        "Familienrecht",
+        "Anhörung",
+        "Kindeswohl",
+        "Entscheidung"
+      ],
+      "voraussetzungen": "Befähigung zum Richteramt sowie soziale Kompetenz und Verantwortungsbewusstsein.",
+      "gehalt": 7200,
+      "buerger": "",
+      "besetzt": false,
+      "art": "anstellung",
+      "dauer": 0
+    },
+    {
+      "id": "s0005",
+      "aktiv": true,
+      "bezeichnung": "Justizdienstangestellter",
+      "beschreibung": "Während der Ausbildung im Justizdienst am Amtsgericht erhältst du einen umfassenden Einblick in die Arbeit der ordentlichen Gerichtsbarkeit. Du unterstützt Richterinnen und Richter sowie Rechtspflegerinnen und Rechtspfleger bei der Vorbereitung und Durchführung von Gerichtsverfahren. Dabei lernst du den Umgang mit Akten, Fristen und gerichtlichen Entscheidungen kennen und arbeitest eng mit verschiedenen Abteilungen des Amtsgerichts zusammen. Die Ausbildung vermittelt dir fundierte rechtliche und organisatorische Kenntnisse und bereitet dich auf eine verantwortungsvolle Tätigkeit im Justizwesen vor.",
+      "bereiche": [
+        "Zivilgerichtsbarkeit",
+        "Strafgerichtsbarkeit",
+        "Familiengericht",
+        "Nachlassgericht",
+        "Serviceeinheiten"
+      ],
+      "voraussetzungen": "Vorausgesetzt wird mindestens die mittlere Reife oder Fachhochschulreife sowie Interesse an rechtlichen Fragestellungen und der Arbeit im öffentlichen Dienst. Sorgfalt, Verantwortungsbewusstsein, Verschwiegenheit und Teamfähigkeit sind ebenso wichtig wie ein einwandfreies Führungszeugnis.",
+      "gehalt": 1200,
+      "buerger": "",
+      "besetzt": false,
+      "art": "ausbildung",
+      "dauer": 36
+    },
+    {
+      "id": "s0006",
+      "aktiv": true,
+      "bezeichnung": "Rechtspflege (LL.B.)",
+      "beschreibung": "Im dualen Studium im Bereich Justiz und Rechtspflege wirst du praxisnah auf eine anspruchsvolle Tätigkeit in der Gerichtsbarkeit vorbereitet. Du kombinierst wissenschaftliche Studienphasen an einer Hochschule für Justiz mit praktischen Einsätzen am Amtsgericht. Dabei erhältst du vertiefte Einblicke in zivil-, straf- und familienrechtliche Verfahren und arbeitest eng mit Richterinnen und Richtern zusammen. Das Studium legt die Grundlage für verantwortungsvolle Aufgaben in der Justiz und kann – je nach Landeslaufbahn – den Weg in weiterführende juristische Qualifikationen eröffnen.",
+      "bereiche": [
+        "Zivil- und Strafrecht",
+        "Familien- und Betreuungsrecht",
+        "Verfahrensrecht",
+        "Justizverwaltung"
+      ],
+      "voraussetzungen": "Erforderlich sind die allgemeine Hochschulreife oder Fachhochschulreife, Interesse an juristischen Fragestellungen sowie analytisches Denkvermögen. Zudem werden Zuverlässigkeit, Verantwortungsbewusstsein, Teamfähigkeit und ein einwandfreies Führungszeugnis erwartet.",
+      "gehalt": 1300,
+      "buerger": "",
+      "besetzt": false,
+      "art": "duales_studium",
+      "dauer": 36
+    }
+  ],
+  "bewerbungen": [
+    {
+      "bewerber": "67b7b148-2c38-4b5d-826b-978b7644a79d",
+      "stelle": "s0001",
+      "bewerbungsdatum": "2026-01-08",
+      "rückmeldedatum": "2026-01-08",
+      "status": "eingestellt"
+    },
+    {
+      "bewerber": "e99aa463-ddaf-4986-852b-681067014e55",
+      "stelle": "s0002",
+      "bewerbungsdatum": "2026-01-14",
+      "rückmeldedatum": "2026-01-14",
+      "status": "eingestellt"
+    }
+  ],
+  "postfach": [
+    {
+      "sender": "Katharina Braun",
+      "beschreibung": "Hat das Stellenangebot für Richter (s0002) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "Katharina Braun",
+      "beschreibung": "Neue Bewerbung für Stelle Richter (s0002).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    },
+    {
+      "sender": "67b7b148-2c38-4b5d-826b-978b7644a79d",
+      "beschreibung": "Hat das Stellenangebot für Richter (s0001) angenommen.",
+      "verlinkung": "/unternehmen/mitarbeiter",
+      "status": true
+    },
+    {
+      "sender": "67b7b148-2c38-4b5d-826b-978b7644a79d",
+      "beschreibung": "Neue Bewerbung für Stelle Richter (s0001).",
+      "verlinkung": "/unternehmen/bewerber",
+      "status": true
+    }
+  ]
+}
